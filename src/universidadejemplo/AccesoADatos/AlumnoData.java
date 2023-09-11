@@ -40,11 +40,11 @@ public class AlumnoData {
             ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
             ps.setBoolean(5, alumno.isEstado());
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()){
-                alumno.setIdAlumno(rs.getInt("idAlumno"));
-                ps.close();
-            }
+//            ResultSet rs = ps.getGeneratedKeys();
+//            if (rs.next()){
+//                alumno.setIdAlumno(rs.getInt("idAlumno"));
+//                ps.close();
+//            }
         } catch (SQLException ex) {
           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
         }
