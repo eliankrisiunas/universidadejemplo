@@ -4,22 +4,22 @@ package universidadejemplo.Entidades;
 public class Materia {
     int idMateria;
     String nombre;
-    int anioMateria;
+    int añoMateria;
     boolean estado;
 
     public Materia() {
     }
 
-    public Materia(int idMateria, String nombre, int anioMateria, boolean estado) {
+    public Materia(int idMateria, String nombre, int añoMateria, boolean estado) {
         this.idMateria = idMateria;
         this.nombre = nombre;
-        this.anioMateria = anioMateria;
+        this.añoMateria = añoMateria;
         this.estado = estado;
     }
 
-    public Materia(String nombre, int anioMateria, boolean estado) {
+    public Materia(String nombre, int añoMateria, boolean estado) {
         this.nombre = nombre;
-        this.anioMateria = anioMateria;
+        this.añoMateria = añoMateria;
         this.estado = estado;
     }
 
@@ -40,12 +40,12 @@ public class Materia {
         this.nombre = nombre;
     }
 
-    public int getAnioMateria() {
-        return anioMateria;
+    public int getAño() {
+        return añoMateria;
     }
 
-    public void setAnioMateria(int anioMateria) {
-        this.anioMateria = anioMateria;
+    public void setAño(int añoMateria) {
+        this.añoMateria = añoMateria;
     }
 
     public boolean isEstado() {
@@ -58,7 +58,7 @@ public class Materia {
 
     @Override
     public String toString() {
-        return "Materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", anioMateria=" + anioMateria + ", estado=" + estado + '}';
+        return "Materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", añoMateria=" + añoMateria + ", estado=" + estado + '}';
     }
     
 
