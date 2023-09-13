@@ -1,12 +1,19 @@
 
 package universidadejemplo.Vistas;
 
+import javax.swing.JOptionPane;
+import universidadejemplo.AccesoADatos.MateriaData;
+import universidadejemplo.Entidades.Materia;
+
 
 public class FMateria extends javax.swing.JInternalFrame {
 
+    private MateriaData materiadata;
+    
     
     public FMateria() {
         initComponents();
+        materiadata = new MateriaData();
     }
 
     
@@ -49,6 +56,11 @@ public class FMateria extends javax.swing.JInternalFrame {
         jButton1.setText("Salir");
 
         jButton2.setText("Buscar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Nuevo");
 
@@ -130,6 +142,17 @@ public class FMateria extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if (jTextFieldCod.getText() != null) {
+            int id = Integer.parseInt(jTextFieldCod.getText());
+            Materia materia = new materiadata
+        }else {
+            JOptionPane.showMessageDialog(null, "tienes que ingresar un codigo");
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

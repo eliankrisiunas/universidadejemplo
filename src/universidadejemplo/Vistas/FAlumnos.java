@@ -256,7 +256,7 @@ public class FAlumnos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
             // TODO add your handling code here:
         if (JTDocumento.getText() != null) {
-             int doc = Integer.parseInt(JTDocumento.getText());
+        int doc = Integer.parseInt(JTDocumento.getText());
         Alumno alumno = alumnodata.buscarAlumnoPorDni(doc);
         JTApellido.setText(alumno.getApellido());
         JTNombre.setText(alumno.getNombre());
