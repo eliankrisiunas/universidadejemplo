@@ -289,10 +289,10 @@ public class FAlumnos extends javax.swing.JInternalFrame {
     private void JBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBeliminarActionPerformed
         // TODO add your handling code here:
                // TODO add your handling code here:
-        LocalDate fecha = null;
-        if (JDfecha.getDate() != null) {
-            fecha = JDfecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        }
+//        LocalDate fecha = null;
+//        if (JDfecha.getDate() != null) {
+//            fecha = JDfecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        }
         int doc = Integer.parseInt(JTDocumento.getText());
         Alumno alumno = alumnodata.buscarAlumnoPorDni(doc);
         alumnodata.eliminarAlumno(alumno.getIdAlumno());

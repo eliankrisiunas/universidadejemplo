@@ -21,19 +21,22 @@ public class MateriaData {
     public MateriaData() {
         con = Conexion.getConexion();
     }
+
+  
      
      public void guardarMateria(Materia materia){
-             String sql = "INSERT INTO materia(nombre, añoMateria, estado)";
+             String sql = "INSERT INTO materia(nombre, anno, estado) VALUES (?,?,?)";
              try {
              PreparedStatement ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
              ps.setString(1, materia.getNombre());
-             ps.setInt(2, materia.getAño());
+             ps.setInt(2, materia.getAnno());
              ps.setBoolean(3, materia.isEstado());
-             ResultSet rs= ps.getGeneratedKeys();
-             if (rs.next()){
-                 materia.setIdMateria(rs.getInt("idMateria"));
-                 ps.close();
-             }
+             ps.executeUpdate();
+//             ResultSet rs= ps.getGeneratedKeys();
+//             if (rs.next()){
+//                 materia.setIdMateria(rs.getInt("idMateria"));
+//                 ps.close();
+//             }
              
         
          } catch (SQLException ex) {
@@ -44,7 +47,7 @@ public class MateriaData {
      
      public Materia buscarMateria(int id){
          Materia materia = null;
-         String sql = "SELECT nombre, añoMateria, estado FROM materia WHERE idMateria = ? AND estado = 1";
+         String sql = "SELECT nombre, anno, estado FROM materia WHERE idMateria = ? AND estado = 1";
          PreparedStatement ps = null;
          
          try {
@@ -57,7 +60,7 @@ public class MateriaData {
              materia = new Materia();
              materia.setIdMateria(id);
              materia.setNombre(rs.getString("nombre"));
-             materia.setAño(rs.getInt("año"));
+             materia.setAnno(rs.getInt("anno"));
              materia.setEstado(true);
              
              
@@ -76,14 +79,14 @@ public class MateriaData {
      }
 
     public void modificarMateria(Materia materia) {
-        String sql = "UPDATE alumno SET nombre = ?, año = ?, estado = ? WHERE idMateria = ?";
+        String sql = "UPDATE alumno SET nombre = ?, anno = ?, estado = ? WHERE idMateria = ?";
 
         PreparedStatement ps = null;
 
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, materia.getNombre());
-            ps.setInt(2, materia.getAño());
+            ps.setInt(2, materia.getAnno());
             ps.setBoolean(3, materia.isEstado());
 
         } catch (SQLException ex) {
@@ -116,7 +119,7 @@ public class MateriaData {
                 Materia materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAño(rs.getInt("año"));
+                materia.setAnno(rs.getInt("anno"));
                 materia.setEstado(true);
                 mat.add(materia);
             }

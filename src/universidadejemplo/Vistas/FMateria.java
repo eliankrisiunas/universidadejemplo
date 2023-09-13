@@ -1,22 +1,19 @@
-
 package universidadejemplo.Vistas;
 
+import static java.lang.String.valueOf;
 import javax.swing.JOptionPane;
 import universidadejemplo.AccesoADatos.MateriaData;
 import universidadejemplo.Entidades.Materia;
 
-
 public class FMateria extends javax.swing.JInternalFrame {
 
     private MateriaData materiadata;
-    
-    
+
     public FMateria() {
         initComponents();
         materiadata = new MateriaData();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -32,7 +29,7 @@ public class FMateria extends javax.swing.JInternalFrame {
         jTextFieldAnno = new javax.swing.JTextField();
         jRadioButtonEst = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        JBbuscar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -54,19 +51,44 @@ public class FMateria extends javax.swing.JInternalFrame {
         jLEst.setText("Estado");
 
         jButton1.setText("Salir");
-
-        jButton2.setText("Buscar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        JBbuscar.setText("Buscar");
+        JBbuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JBbuscarMouseClicked(evt);
+            }
+        });
+        JBbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBbuscarActionPerformed(evt);
             }
         });
 
         jButton3.setText("Nuevo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Eliminar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Guardar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,7 +125,7 @@ public class FMateria extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(43, 43, 43)
-                                .addComponent(jButton2))
+                                .addComponent(JBbuscar))
                             .addComponent(jTextFieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
@@ -118,7 +140,7 @@ public class FMateria extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLCod)
                     .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(JBbuscar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLNom)
@@ -143,21 +165,53 @@ public class FMateria extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    private void JBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBbuscarActionPerformed
+
         if (jTextFieldCod.getText() != null) {
             int id = Integer.parseInt(jTextFieldCod.getText());
-            Materia materia = new materiadata
-        }else {
-            JOptionPane.showMessageDialog(null, "tienes que ingresar un codigo");
+            Materia materia = materiadata.buscarMateria(id);
+            jTextFieldAnno.setText(valueOf(materia.getAnno()));
+            jTextFieldNom.setText(materia.getNombre());
+            jRadioButtonEst.setSelected(materia.isEstado());
+        } else {
+            JOptionPane.showMessageDialog(null, "necesitas ingresar un codigo");
         }
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_JBbuscarActionPerformed
+
+    private void JBbuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBbuscarMouseClicked
+
+    }//GEN-LAST:event_JBbuscarMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        jTextFieldAnno.setText("");
+        jTextFieldNom.setText("");
+        jRadioButtonEst.setSelected(false);
+        jTextFieldCod.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        CargarMateria();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        int id = Integer.parseInt(jTextFieldCod.getText());
+        Materia materia = materiadata.buscarMateria(id);
+        materiadata.eliminarMateria(id);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBbuscar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -172,4 +226,14 @@ public class FMateria extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldCod;
     private javax.swing.JTextField jTextFieldNom;
     // End of variables declaration//GEN-END:variables
+
+private void CargarMateria(){
+    Materia materia = new Materia ( jTextFieldNom.getText(), Integer.parseInt(jTextFieldAnno.getText()), jRadioButtonEst.isEnabled());
+    materiadata.guardarMateria(materia);
+}
+
+
+
+
+
 }
