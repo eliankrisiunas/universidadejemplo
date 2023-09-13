@@ -138,6 +138,11 @@ public class menu extends javax.swing.JFrame {
         MMateria.setText("Materia");
 
         jMenuItem2.setText("Formulario de Materia");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         MMateria.add(jMenuItem2);
 
         jMenuBar1.add(MMateria);
@@ -208,6 +213,15 @@ public class menu extends javax.swing.JFrame {
         fa.setVisible(true);
         JDescritorio.add(fa);
     }//GEN-LAST:event_JMformularioAlumnoActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        JDescritorio.removeAll();
+        JDescritorio.repaint();
+        FMateria fm = new FMateria();
+        fm.setVisible(true);
+        JDescritorio.add(fm);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
