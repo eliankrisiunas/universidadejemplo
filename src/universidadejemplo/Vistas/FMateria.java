@@ -37,6 +37,7 @@ public class FMateria extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setResizable(true);
 
         jLMateria.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLMateria.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

@@ -5,6 +5,9 @@
  */
 package universidadejemplo.Vistas;
 
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,6 +15,8 @@ import javax.swing.JOptionPane;
  * @author iarak
  */
 public class MenuPrincipal extends javax.swing.JFrame {
+    FAlumnos fa = new FAlumnos();
+    FMateria fm = new FMateria();
 
     /**
      * Creates new form menu
@@ -41,9 +46,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jInternalFrame3 = new javax.swing.JInternalFrame();
         JDescritorio = new javax.swing.JDesktopPane();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        Jpanel1 = new javax.swing.JPanel();
+        image = new javax.swing.JLabel();
+        text1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         MAlumno = new javax.swing.JMenu();
         JMformularioAlumno = new javax.swing.JMenuItem();
@@ -96,6 +101,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
 
         jInternalFrame3.setVisible(true);
 
@@ -110,50 +117,50 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidadejemplo/Vistas/equipomanda.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
+        JDescritorio.setBackground(new java.awt.Color(0, 0, 0));
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        Jpanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("¡El equipo 31 manda!");
+        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidadejemplo/Vistas/equipomanda.png"))); // NOI18N
+        image.setText("jLabel1");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        text1.setBackground(new java.awt.Color(51, 51, 51));
+        text1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        text1.setForeground(new java.awt.Color(255, 255, 255));
+        text1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        text1.setText("¡El equipo 37 manda!");
+
+        javax.swing.GroupLayout Jpanel1Layout = new javax.swing.GroupLayout(Jpanel1);
+        Jpanel1.setLayout(Jpanel1Layout);
+        Jpanel1Layout.setHorizontalGroup(
+            Jpanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Jpanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(text1, javax.swing.GroupLayout.DEFAULT_SIZE, 796, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(image, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel2)
-                .addContainerGap(20, Short.MAX_VALUE))
+        Jpanel1Layout.setVerticalGroup(
+            Jpanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Jpanel1Layout.createSequentialGroup()
+                .addComponent(text1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 430, Short.MAX_VALUE))
         );
 
-        JDescritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        JDescritorio.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        JDescritorio.setLayer(Jpanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout JDescritorioLayout = new javax.swing.GroupLayout(JDescritorio);
         JDescritorio.setLayout(JDescritorioLayout);
         JDescritorioLayout.setHorizontalGroup(
             JDescritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JDescritorioLayout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 802, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(Jpanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         JDescritorioLayout.setVerticalGroup(
             JDescritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JDescritorioLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 463, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Jpanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         MAlumno.setText("Alumno ");
@@ -224,7 +231,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JDescritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(JDescritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -246,23 +255,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void JMformularioAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMformularioAlumnoActionPerformed
         // TODO add your handling code here:
-        
-         JDescritorio.removeAll();
-        JDescritorio.repaint();
-        FAlumnos fa = new FAlumnos();
-        fa.setVisible(true);
-        JDescritorio.add(fa);
+        if (fa.isVisible() == false) {
+            JDescritorio.repaint();
+            JDescritorio.add(fa);
+            fa.setVisible(true);
+            fa.toFront();
+            fa.setBounds(110, 10, 598, 487);
+        }
     }//GEN-LAST:event_JMformularioAlumnoActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        JDescritorio.removeAll();
-        JDescritorio.repaint();
-        FMateria fm = new FMateria();
-        fm.setVisible(true);
-        JDescritorio.add(fm);
+        if (fm.isVisible() == false) {
+            JDescritorio.repaint();
+            JDescritorio.add(fm);
+            fm.setVisible(true);
+            fm.toFront();
+            fm.setBounds(110, 10, 474, 372);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
+    }
     /**
      * @param args the command line arguments
      */
@@ -302,15 +313,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane JDescritorio;
     private javax.swing.JMenuItem JMformularioAlumno;
+    private javax.swing.JPanel Jpanel1;
     private javax.swing.JMenu MAdministracion;
     private javax.swing.JMenu MAlumno;
     private javax.swing.JMenu MConsulta;
     private javax.swing.JMenu MMateria;
+    private javax.swing.JLabel image;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JInternalFrame jInternalFrame3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
@@ -323,7 +334,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel text1;
     // End of variables declaration//GEN-END:variables
 }

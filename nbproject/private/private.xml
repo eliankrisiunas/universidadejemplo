@@ -3,15 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/Vistas/equipomanda.png</file>
             <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/Vistas/FAlumnos.java</file>
             <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/Vistas/ManejoInscripciones.java</file>
             <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/Vistas/FMateria.java</file>
             <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/Entidades/Materia.java</file>
             <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/AccesoADatos/AlumnoData.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/Vistas/menu.java</file>
+            <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/Vistas/MenuPrincipal.java</file>
             <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/Vistas/AlumnosPorMateria.java</file>
             <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/AccesoADatos/Conexion.java</file>
             <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/AccesoADatos/MateriaData.java</file>
+            <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/nbproject/build-impl.xml</file>
         </group>
     </open-files>
 </project-private>
