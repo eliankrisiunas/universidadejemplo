@@ -79,8 +79,12 @@ public class Alumno {
         this.estado = estado;
     }
 
+    @Override
+    public String toString() {
+        return dni + "-" + apellido + "-" + nombre ;
+    }
 
-
+  
    
    
     

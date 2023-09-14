@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class MenuPrincipal extends javax.swing.JFrame {
     FAlumnos fa = new FAlumnos();
     FMateria fm = new FMateria();
-
+    ManejoInscripciones mi = new ManejoInscripciones();
     /**
      * Creates new form menu
      */
@@ -55,8 +55,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         MMateria = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         MAdministracion = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        JMinscripciones = new javax.swing.JMenuItem();
+        JMnotas = new javax.swing.JMenuItem();
         MConsulta = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
 
@@ -116,8 +116,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-
-        JDescritorio.setBackground(new java.awt.Color(0, 0, 0));
 
         Jpanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -194,21 +192,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         MAdministracion.setText("Administración ");
 
-        jMenuItem7.setText("Manejo de Inscripciones");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        JMinscripciones.setText("Manejo de Inscripciones");
+        JMinscripciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                JMinscripcionesActionPerformed(evt);
             }
         });
-        MAdministracion.add(jMenuItem7);
+        MAdministracion.add(JMinscripciones);
 
-        jMenuItem8.setText("Manipulación de Notas");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        JMnotas.setText("Manipulación de Notas");
+        JMnotas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                JMnotasActionPerformed(evt);
             }
         });
-        MAdministracion.add(jMenuItem8);
+        MAdministracion.add(JMnotas);
 
         jMenuBar1.add(MAdministracion);
 
@@ -239,13 +237,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void JMinscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMinscripcionesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+        if (mi.isVisible() == false) {
+            JDescritorio.repaint();
+            JDescritorio.add(mi);
+            mi.setVisible(true);
+            mi.toFront();
+            mi.setBounds(110, 10, 598, 487);
+        }
+        
+    }//GEN-LAST:event_JMinscripcionesActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void JMnotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMnotasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_JMnotasActionPerformed
 
     private void MAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAlumnoActionPerformed
        
@@ -313,6 +319,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane JDescritorio;
     private javax.swing.JMenuItem JMformularioAlumno;
+    private javax.swing.JMenuItem JMinscripciones;
+    private javax.swing.JMenuItem JMnotas;
     private javax.swing.JPanel Jpanel1;
     private javax.swing.JMenu MAdministracion;
     private javax.swing.JMenu MAlumno;
@@ -331,8 +339,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel text1;

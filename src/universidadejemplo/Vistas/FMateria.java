@@ -28,11 +28,11 @@ public class FMateria extends javax.swing.JInternalFrame {
         jTextFieldCod = new javax.swing.JTextField();
         jTextFieldAnno = new javax.swing.JTextField();
         jRadioButtonEst = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        JBsalir = new javax.swing.JButton();
         JBbuscar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        JBnuevo = new javax.swing.JButton();
+        JBeliminar = new javax.swing.JButton();
+        JBguardar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -51,10 +51,10 @@ public class FMateria extends javax.swing.JInternalFrame {
 
         jLEst.setText("Estado");
 
-        jButton1.setText("Salir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        JBsalir.setText("Salir");
+        JBsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                JBsalirActionPerformed(evt);
             }
         });
 
@@ -70,24 +70,24 @@ public class FMateria extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setText("Nuevo");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        JBnuevo.setText("Nuevo");
+        JBnuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                JBnuevoActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Eliminar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        JBeliminar.setText("Eliminar");
+        JBeliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                JBeliminarActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Guardar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        JBguardar.setText("Guardar");
+        JBguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                JBguardarActionPerformed(evt);
             }
         });
 
@@ -100,13 +100,13 @@ public class FMateria extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jButton3)
+                        .addComponent(JBnuevo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4)
+                        .addComponent(JBeliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
+                        .addComponent(JBguardar)
                         .addGap(21, 21, 21)
-                        .addComponent(jButton1))
+                        .addComponent(JBsalir))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(145, 145, 145)
                         .addComponent(jLMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -156,10 +156,10 @@ public class FMateria extends javax.swing.JInternalFrame {
                     .addComponent(jRadioButtonEst))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(JBsalir)
+                    .addComponent(JBnuevo)
+                    .addComponent(JBeliminar)
+                    .addComponent(JBguardar))
                 .addGap(55, 55, 55))
         );
 
@@ -183,39 +183,39 @@ public class FMateria extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_JBbuscarMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void JBnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBnuevoActionPerformed
         // TODO add your handling code here:
         jTextFieldAnno.setText("");
         jTextFieldNom.setText("");
         jRadioButtonEst.setSelected(false);
         jTextFieldCod.setText("");
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_JBnuevoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void JBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsalirActionPerformed
         // TODO add your handling code here:
         setVisible(false);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_JBsalirActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void JBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBguardarActionPerformed
         // TODO add your handling code here:
         CargarMateria();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_JBguardarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void JBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBeliminarActionPerformed
         // TODO add your handling code here:
         int id = Integer.parseInt(jTextFieldCod.getText());
         Materia materia = materiadata.buscarMateria(id);
         materiadata.eliminarMateria(id);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_JBeliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBbuscar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton JBeliminar;
+    private javax.swing.JButton JBguardar;
+    private javax.swing.JButton JBnuevo;
+    private javax.swing.JButton JBsalir;
     private javax.swing.JLabel jLAnno;
     private javax.swing.JLabel jLCod;
     private javax.swing.JLabel jLEst;
