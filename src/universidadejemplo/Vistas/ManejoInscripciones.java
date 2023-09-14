@@ -177,6 +177,9 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
     private void JRBmateriasNoInscrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRBmateriasNoInscrActionPerformed
         // TODO add your handling code here:
         ((DefaultTableModel)JTabla.getModel()).setRowCount(0);
+        for (Materia materia : materiadata.listarMaterias()) {
+            modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
+        }
     }//GEN-LAST:event_JRBmateriasNoInscrActionPerformed
 
     private void cargarCombo() {
