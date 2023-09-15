@@ -16,9 +16,13 @@ import universidadejemplo.Entidades.Inscripcion;
 public class InscripcionData {
 
     private Connection con = null;
+    private AlumnoData alumnodata;
+    private MateriaData materiadata;
 
     public InscripcionData() {
         con = Conexion.getConexion();
+        alumnodata = new AlumnoData();
+        materiadata = new MateriaData();
     }
 
     public void guardarInscripcion(Inscripcion inscripcion) {
@@ -33,26 +37,50 @@ public class InscripcionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error de conexion " + ex.getMessage());
         }
-        
+
     }
+
     public List<Inscripcion> obtenerInscripciones() {
         List<Inscripcion> inscripcionLista = new ArrayList();
-        String sql = "SELECT * FROM inscripcion WHERE estado = 1";
+        String sql = "SELECT * FROM inscripcion WHERE 1";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Inscripcion inscripcion = new Inscripcion();
+                inscripcion.setAlumno(alumnodata.buscarAlumno(rs.getInt("idAlumno")));
+                inscripcion.setMateria(materiadata.buscarMateria(rs.getInt("idMateria")));
+                inscripcion.setIdInscripcion(rs.getInt("idInscripto"));
+                inscripcion.setNota(rs.getInt("nota"));
+                inscripcionLista.add(inscripcion);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error de conexion" + ex.getMessage());
+        }
+
+        return inscripcionLista;
+    }
+
+    public List<Inscripcion> obtenerInscripcionPorAlumno(int id) {
+        List<Inscripcion> inscripcionLista = new ArrayList();
+        String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 Inscripcion inscripcion = new Inscripcion();
-                inscripcion.setAlumno(rs.);
+                inscripcion.setAlumno(alumnodata.buscarAlumno(rs.getInt("idAlumno")));
+                inscripcion.setMateria(materiadata.buscarMateria(rs.getInt("idMateria")));
+                inscripcion.setIdInscripcion(rs.getInt("idInscripto"));
+                inscripcion.setNota(rs.getInt("nota"));
+                inscripcionLista.add(inscripcion);
             }
+            ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "error de conexion" + ex.getMessage());
         }
-        
         return inscripcionLista;
     }
 }
-
-
-
-
