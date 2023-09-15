@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import universidadejemplo.Entidades.Alumno;
 import universidadejemplo.Entidades.Inscripcion;
+import universidadejemplo.Entidades.Materia;
 
 public class InscripcionData {
 
@@ -69,7 +70,7 @@ public class InscripcionData {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 Inscripcion inscripcion = new Inscripcion();
                 inscripcion.setAlumno(alumnodata.buscarAlumno(rs.getInt("idAlumno")));
                 inscripcion.setMateria(materiadata.buscarMateria(rs.getInt("idMateria")));
@@ -83,4 +84,69 @@ public class InscripcionData {
         }
         return inscripcionLista;
     }
+
+    public List<Materia> obtenerMateriaCursadas(int id) {
+        List<Materia> materias = new ArrayList();
+        String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripción JOIN materia"
+                + "ON(inscripción.idMateria=materia.idMateria) WHERE inscripcion.idAlumno = ? ";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            Materia materia;
+            while (rs.next()) {
+                materia = new Materia();
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setEstado(rs.getBoolean("estado"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnno(rs.getInt("anno"));
+                materias.add(materia);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error de conexion " + ex.getMessage());
+        }
+        return materias;
+    }
+
+    public List<Materia> obtenerMateriasNoCursadas(int id) {
+        List<Materia> materias = new ArrayList();
+        String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripción JOIN materia"
+                + "ON(inscripción.idMateria=materia.idMateria) WHERE inscripcion.idAlumno = ? AND materia.estado = 0";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            Materia materia;
+            while (rs.next()) {
+                materia = new Materia();
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setEstado(rs.getBoolean("estado"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnno(rs.getInt("anno"));
+                materias.add(materia);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "error de conexion " + ex.getMessage());
+        }
+        return materias;
+    }
+
+    public List<Alumno> obtenerAlumnosXMateria(int idMateria) {
+        List<Alumno> alumnos = new ArrayList();
+        String sql = "SELECT inscripcion.idAlumno FROM inscripcion WHERE inscripcion.idMateria = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idMateria);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                alumnos.add(alumnodata.buscarAlumno(rs.getInt("idAlumno")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return alumnos;
+    }
+    // REVISAR METODOS CON MENTOR!!!!!!!!!!!!!!!! 
 }
