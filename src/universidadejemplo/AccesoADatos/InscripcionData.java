@@ -1,4 +1,3 @@
-
 package universidadejemplo.AccesoADatos;
 
 import java.sql.Connection;
@@ -11,16 +10,18 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import universidadejemplo.Entidades.Alumno;
 import universidadejemplo.Entidades.Inscripcion;
 
 public class InscripcionData {
+
     private Connection con = null;
 
     public InscripcionData() {
         con = Conexion.getConexion();
     }
-    
-    public void guardarInscripcion (Inscripcion inscripcion){
+
+    public void guardarInscripcion(Inscripcion inscripcion) {
         String sql = "INSERT INTO inscripcion( nota, idAlumno, idMateria) VALUES (?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -28,15 +29,30 @@ public class InscripcionData {
             ps.setInt(2, inscripcion.getAlumno().getIdAlumno());
             ps.setInt(3, inscripcion.getMateria().getIdMateria());
             ps.executeUpdate();
-            
-            
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error de conexion "+ ex.getMessage());
+            JOptionPane.showMessageDialog(null, "error de conexion " + ex.getMessage());
         }
-                
-                
-                
+        
     }
-    
-    
+    public List<Inscripcion> obtenerInscripciones() {
+        List<Inscripcion> inscripcionLista = new ArrayList();
+        String sql = "SELECT * FROM inscripcion WHERE estado = 1";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Inscripcion inscripcion = new Inscripcion();
+                inscripcion.setAlumno(rs.);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return inscripcionLista;
+    }
 }
+
+
+
+
