@@ -31,7 +31,12 @@ public class Main {
 //        insd.guardarInscripcion(ins);
 //    insd.obtenerInscripcionPorAlumno(7);
 //    insd.borrarInscripcionMateriaAlumno(4, 5);
-        insd.obtenerMateriasNoCursadas(4);
+        for(Materia mat : insd.obtenerMateriasNoCursadas(4)){
+            System.out.println(mat.getNombre());
+            System.out.println(mat.getIdMateria());
+            System.out.println(mat.getAnno());
+            System.out.println(mat.isEstado());
+        }
             
     }
 }

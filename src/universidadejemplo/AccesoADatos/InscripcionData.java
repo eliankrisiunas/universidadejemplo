@@ -115,8 +115,8 @@ public class InscripcionData {
 
     public List<Materia> obtenerMateriasNoCursadas(int id) {
         List<Materia> materias = new ArrayList();
-        String sql = "SELECT inscripcion.idMateria, nombre, anno FROM inscripcion JOIN materia "
-                + "ON(inscripcion.idMateria=materia.idMateria) WHERE inscripcion.idAlumno = 4 AND materia.estado = 0";
+        String sql = "SELECT inscripcion.idMateria, nombre, anno, estado FROM inscripcion JOIN materia "
+                + "ON(inscripcion.idMateria=materia.idMateria) WHERE inscripcion.idAlumno = ? AND materia.estado = 0";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
