@@ -27,14 +27,18 @@ public class InscripcionData {
     }
 
     public void guardarInscripcion(Inscripcion inscripcion) {
-        String sql = "INSERT INTO inscripcion( nota, idAlumno, idMateria) VALUES (?,?,?)";
+        String sql = "INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES (?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setDouble(1, inscripcion.getNota());
             ps.setInt(2, inscripcion.getAlumno().getIdAlumno());
             ps.setInt(3, inscripcion.getMateria().getIdMateria());
             ps.executeUpdate();
-
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()){
+                inscripcion.setIdInscripcion(rs.getInt("idInscripto"));
+                ps.close();
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error de conexion " + ex.getMessage());
         }
@@ -77,7 +81,7 @@ public class InscripcionData {
                 inscripcion.setIdInscripcion(rs.getInt("idInscripto"));
                 inscripcion.setNota(rs.getInt("nota"));
                 inscripcionLista.add(inscripcion);
-            }
+            }System.out.println(inscripcionLista);
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error de conexion" + ex.getMessage());
@@ -87,7 +91,7 @@ public class InscripcionData {
 
     public List<Materia> obtenerMateriaCursadas(int id) {
         List<Materia> materias = new ArrayList();
-        String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripción JOIN materia"
+        String sql = "SELECT inscripcion.idMateria, inscripcion.nombre, inscripcion.año FROM inscripción JOIN materia"
                 + "ON(inscripción.idMateria=materia.idMateria) WHERE inscripcion.idAlumno = ? ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -111,8 +115,8 @@ public class InscripcionData {
 
     public List<Materia> obtenerMateriasNoCursadas(int id) {
         List<Materia> materias = new ArrayList();
-        String sql = "SELECT inscripcion.idMateria, nombre, año FROM inscripción JOIN materia"
-                + "ON(inscripción.idMateria=materia.idMateria) WHERE inscripcion.idAlumno = ? AND materia.estado = 0";
+        String sql = "SELECT inscripcion.idMateria, nombre, anno FROM inscripcion JOIN materia "
+                + "ON(inscripcion.idMateria=materia.idMateria) WHERE inscripcion.idAlumno = 4 AND materia.estado = 0";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -149,4 +153,45 @@ public class InscripcionData {
         return alumnos;
     }
     // REVISAR METODOS CON MENTOR!!!!!!!!!!!!!!!! 
+    
+    public void borrarInscripcionMateriaAlumno (int idAlumno, int idMateria){
+        String sql = "DELETE FROM inscripcion WHERE idAlumno = ? and idMateria = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idMateria);
+            int rs = ps.executeUpdate();
+            if (rs == 1) {
+                JOptionPane.showMessageDialog(null, "se ha eliminado la inscripcion");
+           }
+        } catch (SQLException ex) {
+            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+    }
+    
+    public void actualizarNota(int idAlumno, int idMateria, double nota) {
+        String sql = "UPDATE inscripcion SET nota = ? where idAlumno = ? AND idMateria = ? AND nota = ?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idMateria);
+            ps.setDouble(3, nota);
+
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showConfirmDialog(null, "Nota actualizada.");
+            } else {
+                JOptionPane.showMessageDialog(null, "nota no encontrada");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }
 }

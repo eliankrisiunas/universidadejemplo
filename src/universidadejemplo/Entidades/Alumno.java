@@ -14,14 +14,14 @@ public class Alumno {
     public Alumno() {
     }
 
-//    public Alumno(int idAlumno, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
-//        this.idAlumno = idAlumno;
-//        this.dni = dni;
-//        this.apellido = apellido;
-//        this.nombre = nombre;
-//        this.fechaNacimiento = fechaNacimiento;
-//        this.estado = estado;
-//    }
+    public Alumno(int idAlumno, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
+        this.idAlumno = idAlumno;
+        this.dni = dni;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+        this.estado = estado;
+    }
 
     public Alumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
         this.dni = dni;

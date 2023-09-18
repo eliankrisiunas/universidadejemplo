@@ -59,6 +59,11 @@ double nota;
         this.nota = nota;
     }
 
+    @Override
+    public String toString() {
+        return "idInscripcion=" + idInscripcion + ", alumno=" + alumno + ", materia=" + materia + ", nota=" + nota ;
+    }
+
 
 
 

@@ -40,11 +40,11 @@ public class AlumnoData {
             ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
             ps.setBoolean(5, alumno.isEstado());
             ps.executeUpdate();
-//            ResultSet rs = ps.getGeneratedKeys();
-//            if (rs.next()){
-//                alumno.setIdAlumno(rs.getInt("idAlumno"));
-//                ps.close();
-//            }
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()){
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                ps.close();
+            }
         } catch (SQLException ex) {
           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
         }
@@ -53,7 +53,7 @@ public class AlumnoData {
     public Alumno buscarAlumno(int id){
     
     Alumno alumno = null;
-    String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE id idAlumno = ? AND estado = 1";
+    String sql = "SELECT dni, apellido, nombre, fechaNacimiento FROM alumno WHERE idAlumno = ? AND estado = 1";
     PreparedStatement ps = null;
     
         try {
