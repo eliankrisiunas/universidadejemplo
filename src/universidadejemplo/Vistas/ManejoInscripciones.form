@@ -143,6 +143,7 @@
         <Property name="text" type="java.lang.String" value="Materias no inscriptas"/>
       </Properties>
       <Events>
+        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="JRBmateriasNoInscrItemStateChanged"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JRBmateriasNoInscrActionPerformed"/>
       </Events>
     </Component>
@@ -181,6 +182,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBsalirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="JCBalumnos">
       <Events>

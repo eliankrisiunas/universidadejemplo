@@ -7,6 +7,7 @@ package universidadejemplo.Vistas;
 
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.AccesoADatos.AlumnoData;
+import universidadejemplo.AccesoADatos.InscripcionData;
 import universidadejemplo.AccesoADatos.MateriaData;
 import universidadejemplo.Entidades.Alumno;
 import universidadejemplo.Entidades.Materia;
@@ -20,11 +21,14 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
     private AlumnoData alumnodata;
     private MateriaData materiadata;
     private DefaultTableModel modelotabla = new DefaultTableModel();
+    private InscripcionData inscripciondata;
+    private Alumno alumno;
 
     public ManejoInscripciones() {
         initComponents();
         alumnodata = new AlumnoData();
         materiadata = new MateriaData();
+        inscripciondata = new InscripcionData();
         cargarCombo();
         armarCabecera();
         cargarDatos();
@@ -64,6 +68,11 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         JRBmateriasInscr.setText("Materias inscriptas ");
 
         JRBmateriasNoInscr.setText("Materias no inscriptas");
+        JRBmateriasNoInscr.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                JRBmateriasNoInscrItemStateChanged(evt);
+            }
+        });
         JRBmateriasNoInscr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JRBmateriasNoInscrActionPerformed(evt);
@@ -88,6 +97,11 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         JBanularInscr.setText("Anular Inscripcion");
 
         JBsalir.setText("Salir");
+        JBsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBsalirActionPerformed(evt);
+            }
+        });
 
         JCBalumnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,16 +185,29 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
 
     private void JCBalumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBalumnosActionPerformed
         // TODO add your handling code here:
+        borrarFilas();
+        cargarDatos();
 
     }//GEN-LAST:event_JCBalumnosActionPerformed
 
     private void JRBmateriasNoInscrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRBmateriasNoInscrActionPerformed
         // TODO add your handling code here:
-        ((DefaultTableModel)JTabla.getModel()).setRowCount(0);
-        for (Materia materia : materiadata.listarMaterias()) {
+        Alumno alum = (Alumno) JCBalumnos.getSelectedItem();
+        ((DefaultTableModel) JTabla.getModel()).setRowCount(0);
+        for (Materia materia : inscripciondata.obtenerMateriasNoCursadas(alum.getIdAlumno())) {
             modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
         }
     }//GEN-LAST:event_JRBmateriasNoInscrActionPerformed
+
+    private void JBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsalirActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_JBsalirActionPerformed
+
+    private void JRBmateriasNoInscrItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JRBmateriasNoInscrItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JRBmateriasNoInscrItemStateChanged
 
     private void cargarCombo() {
         for (Alumno alumno : alumnodata.listarAlumnos()) {
@@ -197,11 +224,31 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
     }
 
     private void cargarDatos() {
-        for (Materia materia : materiadata.listarMaterias()) {
-            modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
+        Alumno alum = (Alumno) JCBalumnos.getSelectedItem();
+        if (JRBmateriasInscr.isEnabled()) {
+            for (Materia materia : inscripciondata.obtenerMateriaCursadas(alum.getIdAlumno())) {
+                modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
+            }
+        } else if (JRBmateriasNoInscr.isEnabled()) {
+            for (Materia materia : inscripciondata.obtenerMateriasNoCursadas(alum.getIdAlumno())) {
+                modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
+            }
+        } else {
+            for (Materia materia : materiadata.listarMaterias()) {
+                modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
+            }
         }
+
     }
-    
+
+    private void borrarFilas() {
+        ((DefaultTableModel) JTabla.getModel()).setRowCount(0);
+    }
+
+    private void materiaAlumno() {
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBanularInscr;
     private javax.swing.JButton JBinscribir;

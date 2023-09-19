@@ -91,8 +91,8 @@ public class InscripcionData {
 
     public List<Materia> obtenerMateriaCursadas(int id) {
         List<Materia> materias = new ArrayList();
-        String sql = "SELECT inscripcion.idMateria, inscripcion.nombre, inscripcion.año FROM inscripción JOIN materia"
-                + "ON(inscripción.idMateria=materia.idMateria) WHERE inscripcion.idAlumno = ? ";
+        String sql = "SELECT inscripcion.idMateria, nombre, anno, estado FROM inscripcion JOIN materia ON(inscripcion.idMateria=materia.idMateria) "
+                + "WHERE inscripcion.idAlumno = ? AND estado = 1";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -146,7 +146,7 @@ public class InscripcionData {
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 alumnos.add(alumnodata.buscarAlumno(rs.getInt("idAlumno")));
-            }
+            } System.out.println(alumnos);
         } catch (SQLException ex) {
             Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -171,25 +171,26 @@ public class InscripcionData {
         
     }
     
-    public void actualizarNota(int idAlumno, int idMateria, double nota) {
-        String sql = "UPDATE inscripcion SET nota = ? where idAlumno = ? AND idMateria = ? AND nota = ?";
+    public void actualizarNota(double nota,int idAlumno, int idMateria) {
+        String sql = "UPDATE inscripcion SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
         PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, idAlumno);
-            ps.setInt(2, idMateria);
-            ps.setDouble(3, nota);
+            ps.setDouble(1, nota);
+            ps.setInt(2, idAlumno);
+            ps.setInt(3, idMateria);
+            
 
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
-                JOptionPane.showConfirmDialog(null, "Nota actualizada.");
+                JOptionPane.showMessageDialog(null, "La nota ha sido actualizada.");
             } else {
-                JOptionPane.showMessageDialog(null, "nota no encontrada");
+                JOptionPane.showMessageDialog(null, "La nota no se ha podido actualizar");
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al ingresar a la base de datos: "+ ex.getMessage());
         }
 
 
