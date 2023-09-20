@@ -58,12 +58,6 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         JBsalir = new javax.swing.JButton();
         JCBalumnos = new javax.swing.JComboBox<>();
 
-        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                formPropertyChange(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Manejo de Inscripciones");
 
@@ -220,9 +214,12 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
 
     private void JRmniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRmniActionPerformed
         // TODO add your handling code here:
-        ((DefaultTableModel) JTabla.getModel()).setRowCount(0);
         borrarFilas();
-        Cmni();
+        if (JRmni.isSelected() == true) {
+            Cmni();
+        } else {
+            Def();
+        }
         JRmi.setSelected(false);
     }//GEN-LAST:event_JRmniActionPerformed
 
@@ -234,19 +231,14 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
 
     private void JRmiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRmiActionPerformed
         // TODO add your handling code here:
-        ((DefaultTableModel) JTabla.getModel()).setRowCount(0);
         borrarFilas();
-        Cmi();
+        if (JRmi.isSelected() == true) {
+            Cmi();
+        } else {
+            Def();
+        }
         JRmni.setSelected(false);
     }//GEN-LAST:event_JRmiActionPerformed
-
-    private void formPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formPropertyChange
-        // TODO add your handling code here:
-//        borrarFilas();
-//        if (JRmi.isSelected() == false && JRmni.isSelected() == false) {
-//            Def();
-//        }
-    }//GEN-LAST:event_formPropertyChange
 
     private void JRmiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_JRmiPropertyChange
         // TODO add your handling code here:
@@ -258,12 +250,12 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
 
     private void JBinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBinscribirActionPerformed
         // TODO add your handling code here:
-        inscripciondata.guardarInscripcion();
         JOptionPane.showMessageDialog(this, "Ya está inscripto c-:");
     }//GEN-LAST:event_JBinscribirActionPerformed
 
     private void JBanularInscrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBanularInscrActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Ya no está inscripto :-c");
     }//GEN-LAST:event_JBanularInscrActionPerformed
 
     private void cargarCombo() {
