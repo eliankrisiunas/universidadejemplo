@@ -4,6 +4,9 @@
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="formPropertyChange"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -44,9 +47,9 @@
                                   <Component id="JBsalir" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="JRBmateriasInscr" min="-2" max="-2" attributes="0"/>
+                                  <Component id="JRmi" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
-                                  <Component id="JRBmateriasNoInscr" min="-2" max="-2" attributes="0"/>
+                                  <Component id="JRmni" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -90,8 +93,8 @@
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="JRBmateriasInscr" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="JRBmateriasNoInscr" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="JRmi" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="JRmni" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="214" max="-2" attributes="0"/>
@@ -133,18 +136,21 @@
         <Property name="text" type="java.lang.String" value="Listado de Materias"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="JRBmateriasInscr">
+    <Component class="javax.swing.JRadioButton" name="JRmi">
       <Properties>
         <Property name="text" type="java.lang.String" value="Materias inscriptas "/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JRmiActionPerformed"/>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="JRmiPropertyChange"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="JRBmateriasNoInscr">
+    <Component class="javax.swing.JRadioButton" name="JRmni">
       <Properties>
         <Property name="text" type="java.lang.String" value="Materias no inscriptas"/>
       </Properties>
       <Events>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="JRBmateriasNoInscrItemStateChanged"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JRBmateriasNoInscrActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JRmniActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -172,11 +178,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Inscribir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBinscribirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="JBanularInscr">
       <Properties>
         <Property name="text" type="java.lang.String" value="Anular Inscripcion"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBanularInscrActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="JBsalir">
       <Properties>

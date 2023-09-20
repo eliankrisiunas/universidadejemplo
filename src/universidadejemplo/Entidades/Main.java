@@ -24,7 +24,7 @@ public class Main {
 //        AlumnoData alumnodata = new AlumnoData();
 //        Alumno alum;
 //        alum = alumnodata.buscarAlumno(4);
-//        MateriaData materiadata = new MateriaData();
+ MateriaData materiadata = new MateriaData();
 //        Materia mat;
 //        mat = materiadata.buscarMateria(5);
 //        Inscripcion ins = new Inscripcion(alum, mat, 6);
@@ -45,5 +45,9 @@ public class Main {
 //            System.out.println(mat.isEstado());
 //        }
 //        insd.actualizarNota(10, 4, 5);
+
+for (Materia materia : materiadata.listarMaterias()) {
+            System.out.println(materia.getIdMateria() + materia.getNombre() + materia.getAnno());
+        }
     }
 }

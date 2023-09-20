@@ -5,11 +5,13 @@
  */
 package universidadejemplo.Vistas;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.AccesoADatos.AlumnoData;
 import universidadejemplo.AccesoADatos.InscripcionData;
 import universidadejemplo.AccesoADatos.MateriaData;
 import universidadejemplo.Entidades.Alumno;
+import universidadejemplo.Entidades.Inscripcion;
 import universidadejemplo.Entidades.Materia;
 
 /**
@@ -31,7 +33,7 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         inscripciondata = new InscripcionData();
         cargarCombo();
         armarCabecera();
-        cargarDatos();
+        Def();
     }
 
     /**
@@ -47,14 +49,20 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        JRBmateriasInscr = new javax.swing.JRadioButton();
-        JRBmateriasNoInscr = new javax.swing.JRadioButton();
+        JRmi = new javax.swing.JRadioButton();
+        JRmni = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTabla = new javax.swing.JTable();
         JBinscribir = new javax.swing.JButton();
         JBanularInscr = new javax.swing.JButton();
         JBsalir = new javax.swing.JButton();
         JCBalumnos = new javax.swing.JComboBox<>();
+
+        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                formPropertyChange(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Manejo de Inscripciones");
@@ -65,17 +73,22 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setText("Listado de Materias");
 
-        JRBmateriasInscr.setText("Materias inscriptas ");
-
-        JRBmateriasNoInscr.setText("Materias no inscriptas");
-        JRBmateriasNoInscr.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                JRBmateriasNoInscrItemStateChanged(evt);
+        JRmi.setText("Materias inscriptas ");
+        JRmi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JRmiActionPerformed(evt);
             }
         });
-        JRBmateriasNoInscr.addActionListener(new java.awt.event.ActionListener() {
+        JRmi.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                JRmiPropertyChange(evt);
+            }
+        });
+
+        JRmni.setText("Materias no inscriptas");
+        JRmni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JRBmateriasNoInscrActionPerformed(evt);
+                JRmniActionPerformed(evt);
             }
         });
 
@@ -93,8 +106,18 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(JTabla);
 
         JBinscribir.setText("Inscribir");
+        JBinscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBinscribirActionPerformed(evt);
+            }
+        });
 
         JBanularInscr.setText("Anular Inscripcion");
+        JBanularInscr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBanularInscrActionPerformed(evt);
+            }
+        });
 
         JBsalir.setText("Salir");
         JBsalir.addActionListener(new java.awt.event.ActionListener() {
@@ -135,9 +158,9 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(JBsalir))
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(JRBmateriasInscr)
+                                    .addComponent(JRmi)
                                     .addGap(141, 141, 141)
-                                    .addComponent(JRBmateriasNoInscr))))
+                                    .addComponent(JRmni))))
                         .addContainerGap(69, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,8 +191,8 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JRBmateriasInscr)
-                    .addComponent(JRBmateriasNoInscr))
+                    .addComponent(JRmi)
+                    .addComponent(JRmni))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
@@ -184,20 +207,24 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JCBalumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBalumnosActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:{
         borrarFilas();
-        cargarDatos();
-
+        if (JRmi.isSelected() == true) {
+            Cmi();
+        } else if (JRmni.isSelected() == true) {
+            Cmni();
+        } else {
+            Def();
+        }
     }//GEN-LAST:event_JCBalumnosActionPerformed
 
-    private void JRBmateriasNoInscrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRBmateriasNoInscrActionPerformed
+    private void JRmniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRmniActionPerformed
         // TODO add your handling code here:
-        Alumno alum = (Alumno) JCBalumnos.getSelectedItem();
         ((DefaultTableModel) JTabla.getModel()).setRowCount(0);
-        for (Materia materia : inscripciondata.obtenerMateriasNoCursadas(alum.getIdAlumno())) {
-            modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
-        }
-    }//GEN-LAST:event_JRBmateriasNoInscrActionPerformed
+        borrarFilas();
+        Cmni();
+        JRmi.setSelected(false);
+    }//GEN-LAST:event_JRmniActionPerformed
 
     private void JBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsalirActionPerformed
         // TODO add your handling code here:
@@ -205,9 +232,39 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_JBsalirActionPerformed
 
-    private void JRBmateriasNoInscrItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JRBmateriasNoInscrItemStateChanged
+    private void JRmiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRmiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JRBmateriasNoInscrItemStateChanged
+        ((DefaultTableModel) JTabla.getModel()).setRowCount(0);
+        borrarFilas();
+        Cmi();
+        JRmni.setSelected(false);
+    }//GEN-LAST:event_JRmiActionPerformed
+
+    private void formPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formPropertyChange
+        // TODO add your handling code here:
+//        borrarFilas();
+//        if (JRmi.isSelected() == false && JRmni.isSelected() == false) {
+//            Def();
+//        }
+    }//GEN-LAST:event_formPropertyChange
+
+    private void JRmiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_JRmiPropertyChange
+        // TODO add your handling code here:
+        if (JRmi.isSelected() == false && JRmni.isSelected() == false) {
+            borrarFilas();
+            Def();
+        }
+    }//GEN-LAST:event_JRmiPropertyChange
+
+    private void JBinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBinscribirActionPerformed
+        // TODO add your handling code here:
+        inscripciondata.guardarInscripcion();
+        JOptionPane.showMessageDialog(this, "Ya está inscripto c-:");
+    }//GEN-LAST:event_JBinscribirActionPerformed
+
+    private void JBanularInscrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBanularInscrActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBanularInscrActionPerformed
 
     private void cargarCombo() {
         for (Alumno alumno : alumnodata.listarAlumnos()) {
@@ -223,39 +280,18 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         JTabla.setModel(modelotabla);
     }
 
-    private void cargarDatos() {
-        Alumno alum = (Alumno) JCBalumnos.getSelectedItem();
-        if (JRBmateriasInscr.isEnabled()) {
-            for (Materia materia : inscripciondata.obtenerMateriaCursadas(alum.getIdAlumno())) {
-                modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
-            }
-        } else if (JRBmateriasNoInscr.isEnabled()) {
-            for (Materia materia : inscripciondata.obtenerMateriasNoCursadas(alum.getIdAlumno())) {
-                modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
-            }
-        } else {
-            for (Materia materia : materiadata.listarMaterias()) {
-                modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
-            }
-        }
-
-    }
-
     private void borrarFilas() {
         ((DefaultTableModel) JTabla.getModel()).setRowCount(0);
     }
 
-    private void materiaAlumno() {
-
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBanularInscr;
     private javax.swing.JButton JBinscribir;
     private javax.swing.JButton JBsalir;
     private javax.swing.JComboBox<Alumno> JCBalumnos;
-    private javax.swing.JRadioButton JRBmateriasInscr;
-    private javax.swing.JRadioButton JRBmateriasNoInscr;
+    private javax.swing.JRadioButton JRmi;
+    private javax.swing.JRadioButton JRmni;
     private javax.swing.JTable JTabla;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -263,4 +299,24 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
+
+    private void Cmi() {
+        Alumno alum = (Alumno) JCBalumnos.getSelectedItem();
+        for (Materia materia : inscripciondata.obtenerMateriaCursadas(alum.getIdAlumno())) {
+            modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
+        }
+    }
+
+    private void Cmni() {
+        Alumno alum = (Alumno) JCBalumnos.getSelectedItem();
+        for (Materia materia : inscripciondata.obtenerMateriasNoCursadas(alum.getIdAlumno())) {
+            modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
+        }
+    }
+
+    private void Def() {
+        for (Materia materia : materiadata.listarMaterias()) {
+            modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
+        }
+    }
 }

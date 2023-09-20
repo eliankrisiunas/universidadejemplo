@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package universidadejemplo.AccesoADatos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,7 +34,7 @@ public class Conexion {
         } catch (ClassNotFoundException  ex) {
            JOptionPane.showMessageDialog(null,"Error al conectarse a la BD: "+ ex.getMessage());
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null,"Error al cargar el driver: "+ ex.getMessage());
+           JOptionPane.showMessageDialog(null,"O hay un error de carga de driver o no estás conectado a la red" + "\n" + ex.getMessage());
         }
     
     }
@@ -54,7 +48,7 @@ public class Conexion {
 //            Connection conexion = DriverManager.getConnection("jdbc:mariadb://localhost:3306/universidadulp","root","");
 //            Class.forName("org.mariadb.jdbc.Driver");
 //        } catch (ClassNotFoundException ex) {
-//            JOptionPane.showMessageDialog(null, "error al cargar el driver " + ex.getMessage());
+//            JOptionPane.showMessageDialog(null, "error al cargar el drivera " + ex.getMessage());
 //        } catch (SQLException ex) {
 //            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
 //        }
