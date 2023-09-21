@@ -231,6 +231,7 @@ public class FMateria extends javax.swing.JInternalFrame {
 private void CargarMateria(){
     Materia materia = new Materia ( jTextFieldNom.getText(), Integer.parseInt(jTextFieldAnno.getText()), jRadioButtonEst.isEnabled());
     materiadata.guardarMateria(materia);
+    materiadata.modificarMateria(materia);
 }
 
 

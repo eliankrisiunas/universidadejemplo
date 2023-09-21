@@ -25,6 +25,7 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
     private DefaultTableModel modelotabla = new DefaultTableModel();
     private InscripcionData inscripciondata;
     private Alumno alumno;
+    private int valorFila;
 
     public ManejoInscripciones() {
         initComponents();
@@ -97,6 +98,11 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        JTabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(JTabla);
 
         JBinscribir.setText("Inscribir");
@@ -250,13 +256,24 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
 
     private void JBinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBinscribirActionPerformed
         // TODO add your handling code here:
+        
         JOptionPane.showMessageDialog(this, "Ya está inscripto c-:");
     }//GEN-LAST:event_JBinscribirActionPerformed
 
     private void JBanularInscrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBanularInscrActionPerformed
         // TODO add your handling code here:
+        Alumno alumno = (Alumno) JCBalumnos.getSelectedItem();
+        int id = alumno.getIdAlumno();
+        Inscripcion inscripcion = (Inscripcion) inscripciondata.obtenerInscripcionPorAlumno(id);
+        inscripciondata.borrarInscripcionMateriaAlumno(id, valorFila);
         JOptionPane.showMessageDialog(this, "Ya no está inscripto :-c");
     }//GEN-LAST:event_JBanularInscrActionPerformed
+
+    private void JTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTablaMouseClicked
+        // TODO add your handling code here:
+        int seleccionarFila = JTabla.rowAtPoint(evt.getPoint());
+        valorFila = (int) JTabla.getValueAt(seleccionarFila, 0);
+    }//GEN-LAST:event_JTablaMouseClicked
 
     private void cargarCombo() {
         for (Alumno alumno : alumnodata.listarAlumnos()) {
