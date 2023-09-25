@@ -5,6 +5,7 @@
  */
 package universidadejemplo.Vistas;
 
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.AccesoADatos.AlumnoData;
@@ -223,10 +224,16 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         borrarFilas();
         if (JRmni.isSelected() == true) {
             Cmni();
+            JBinscribir.setEnabled(true);
+            JBanularInscr.setEnabled(false);
         } else {
             Def();
+            JBinscribir.setEnabled(true);
+            JBanularInscr.setEnabled(true);
+
         }
         JRmi.setSelected(false);
+
     }//GEN-LAST:event_JRmniActionPerformed
 
     private void JBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsalirActionPerformed
@@ -240,10 +247,17 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         borrarFilas();
         if (JRmi.isSelected() == true) {
             Cmi();
+            JBinscribir.setEnabled(false);
+            JBanularInscr.setEnabled(true);
+
         } else {
             Def();
+            JBinscribir.setEnabled(true);
+            JBanularInscr.setEnabled(true);
+
         }
         JRmni.setSelected(false);
+
     }//GEN-LAST:event_JRmiActionPerformed
 
     private void JRmiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_JRmiPropertyChange
@@ -256,23 +270,35 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
 
     private void JBinscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBinscribirActionPerformed
         // TODO add your handling code here:
-        
+        Alumno alumno = (Alumno) JCBalumnos.getSelectedItem();
+        Materia materia = materiadata.buscarMateria(valorFila);
+        Inscripcion inscripcion = new Inscripcion(alumno, materia, 0);
+        inscripciondata.guardarInscripcion(inscripcion);
         JOptionPane.showMessageDialog(this, "Ya está inscripto c-:");
+
+
     }//GEN-LAST:event_JBinscribirActionPerformed
 
     private void JBanularInscrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBanularInscrActionPerformed
         // TODO add your handling code here:
         Alumno alumno = (Alumno) JCBalumnos.getSelectedItem();
         int id = alumno.getIdAlumno();
-        Inscripcion inscripcion = (Inscripcion) inscripciondata.obtenerInscripcionPorAlumno(id);
-        inscripciondata.borrarInscripcionMateriaAlumno(id, valorFila);
-        JOptionPane.showMessageDialog(this, "Ya no está inscripto :-c");
+        List<Inscripcion> inscripcionLista = inscripciondata.obtenerInscripcionPorAlumno(id);
+        System.out.println(inscripcionLista);
+        System.out.println(valorFila);
+        if (valorFila != 0) {
+            inscripciondata.borrarInscripcionMateriaAlumno(id, valorFila);
+            JOptionPane.showMessageDialog(this, "Ya no está inscripto :-c");
+        } else {
+            JOptionPane.showMessageDialog(null, "tiene que seleccionar una materia");
+        }
     }//GEN-LAST:event_JBanularInscrActionPerformed
 
     private void JTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTablaMouseClicked
         // TODO add your handling code here:
         int seleccionarFila = JTabla.rowAtPoint(evt.getPoint());
         valorFila = (int) JTabla.getValueAt(seleccionarFila, 0);
+
     }//GEN-LAST:event_JTablaMouseClicked
 
     private void cargarCombo() {

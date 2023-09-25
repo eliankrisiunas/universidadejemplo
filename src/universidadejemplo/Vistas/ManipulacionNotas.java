@@ -6,18 +6,27 @@
 package universidadejemplo.Vistas;
 
 import javax.swing.table.DefaultTableModel;
+import universidadejemplo.AccesoADatos.AlumnoData;
+import universidadejemplo.AccesoADatos.InscripcionData;
+import universidadejemplo.AccesoADatos.MateriaData;
+import universidadejemplo.Entidades.Alumno;
 
-/**
- *
- * @author iarak
- */
 public class ManipulacionNotas extends javax.swing.JInternalFrame {
-private DefaultTableModel modelotabla = new DefaultTableModel();
-    /**
-     * Creates new form ManipulacionNotas
-     */
+
+    private DefaultTableModel modelotabla = new DefaultTableModel();
+    private AlumnoData alumnodata;
+    private MateriaData materiadata;
+    private InscripcionData inscripciondata;
+    private Alumno alumno;
+    private int valorFila;
+
     public ManipulacionNotas() {
         initComponents();
+        alumnodata = new AlumnoData();
+        materiadata = new MateriaData();
+        inscripciondata = new InscripcionData();
+        cargarCombo();
+        armarCabecera();
     }
 
     /**
@@ -42,6 +51,12 @@ private DefaultTableModel modelotabla = new DefaultTableModel();
         jLabel2.setText("Carga de Notas");
 
         jLabel3.setText("Seleccione un alumno:");
+
+        JCBSelecAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCBSelecAlumnoActionPerformed(evt);
+            }
+        });
 
         JTTablaMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -128,17 +143,31 @@ private DefaultTableModel modelotabla = new DefaultTableModel();
         setVisible(false);
         dispose();
     }//GEN-LAST:event_JBSalirActionPerformed
-private void armarCabecera() {
+
+    private void JCBSelecAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBSelecAlumnoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JCBSelecAlumnoActionPerformed
+    private void armarCabecera() {
         modelotabla.addColumn("ID");
         modelotabla.addColumn("Nombre");
-        modelotabla.addColumn("Año");
+        modelotabla.addColumn("Nota");
         JTTablaMaterias.setModel(modelotabla);
     }
 
+    private void cargarCombo() {
+        for (Alumno alumno : alumnodata.listarAlumnos()) {
+            JCBSelecAlumno.addItem(alumno);
+        }
+
+    }
+    private void borrarFilas() {
+        ((DefaultTableModel) JCBSelecAlumno.getModel()).setRowCount(0);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBGuardar;
     private javax.swing.JButton JBSalir;
-    private javax.swing.JComboBox<String> JCBSelecAlumno;
+    private javax.swing.JComboBox<Alumno> JCBSelecAlumno;
     private javax.swing.JTable JTTablaMaterias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

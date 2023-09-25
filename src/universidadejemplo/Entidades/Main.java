@@ -14,41 +14,17 @@ import universidadejemplo.AccesoADatos.InscripcionData;
 import universidadejemplo.AccesoADatos.MateriaData;
 
 public class Main {
-    
+
     public static void main(String[] args) {
         Conexion EXP = new Conexion();
         Conexion.getConexion();
-        
-        InscripcionData insd = new InscripcionData();
-//        LocalDate fecha = LocalDate.of(2002, Month.MARCH, 16);
-        AlumnoData alumnodata = new AlumnoData();
-        Alumno alum;
-        alum = alumnodata.buscarAlumno(5);
-        MateriaData materiadata = new MateriaData();
-        Materia mat;
-        mat = materiadata.buscarMateria(7);
-        Inscripcion ins = new Inscripcion(alum, mat, 0);
-        insd.guardarInscripcion(ins);
-//        insd.obtenerInscripcionPorAlumno(7);
-//        insd.borrarInscripcionMateriaAlumno(4, 5);
-//        for (Materia mat : insd.obtenerMateriasNoCursadas(5)) {
-//            System.out.println(mat.getNombre());
-//            System.out.println(mat.getIdMateria());
-//            System.out.println(mat.getAnno());
-//            System.out.println(mat.isEstado());
-//        }
-//        insd.obtenerAlumnosXMateria(5);
-//        for (Materia mat : insd.obtenerMateriaCursadas(4)) {
-//            System.out.println(mat.getNombre());
-//            System.out.println(mat.getIdMateria());
-//            System.out.println(mat.getAnno());
-//            System.out.println(mat.isEstado());
-//        }
-//        insd.actualizarNota(10, 4, 5);
 
-//for (Materia materia : materiadata.listarMaterias()) {
-//            System.out.println(materia.getIdMateria() + materia.getNombre() + materia.getAnno());
-//        }
+        AlumnoData alumnodata = new AlumnoData();
+        InscripcionData inscripciondata = new InscripcionData();
+        MateriaData materiadata = new MateriaData();
+        Alumno alum = new Alumno();
+        Materia mat = new Materia();
+        Inscripcion ins = new Inscripcion();
         
     }
 }

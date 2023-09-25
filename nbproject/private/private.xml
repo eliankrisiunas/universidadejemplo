@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/Vistas/ManejoInscripciones.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/Entidades/Main.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/AccesoADatos/InscripcionData.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/Entidades/Inscripcion.java</file>
-            <file>file:/C:/Users/Usuario/Documents/GitHub/universidadejemplo/src/universidadejemplo/AccesoADatos/MateriaData.java</file>
+            <file>file:/C:/Users/iarak/OneDrive/Documentos/universidadejemplo/src/universidadejemplo/AccesoADatos/InscripcionData.java</file>
+            <file>file:/C:/Users/iarak/OneDrive/Documentos/universidadejemplo/src/universidadejemplo/AccesoADatos/AlumnoData.java</file>
+            <file>file:/C:/Users/iarak/OneDrive/Documentos/universidadejemplo/src/universidadejemplo/Vistas/MenuPrincipal.java</file>
+            <file>file:/C:/Users/iarak/OneDrive/Documentos/universidadejemplo/src/universidadejemplo/Vistas/FMateria.java</file>
+            <file>file:/C:/Users/iarak/OneDrive/Documentos/universidadejemplo/src/universidadejemplo/AccesoADatos/Conexion.java</file>
+            <file>file:/C:/Users/iarak/OneDrive/Documentos/universidadejemplo/src/universidadejemplo/Entidades/Main.java</file>
+            <file>file:/C:/Users/iarak/OneDrive/Documentos/universidadejemplo/src/universidadejemplo/Entidades/Inscripcion.java</file>
+            <file>file:/C:/Users/iarak/OneDrive/Documentos/universidadejemplo/src/universidadejemplo/Vistas/ManejoInscripciones.java</file>
+            <file>file:/C:/Users/iarak/OneDrive/Documentos/universidadejemplo/src/universidadejemplo/AccesoADatos/MateriaData.java</file>
         </group>
     </open-files>
 </project-private>

@@ -28,13 +28,11 @@ public class InscripcionData {
 
     public void guardarInscripcion(Inscripcion inscripcion) {
         String sql = "INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES (?,?,?)";
-//                + "UPDATE materia SET materia.estado = 1 WHERE idMateria = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setDouble(1,inscripcion.getNota());
             ps.setInt(2, inscripcion.getAlumno().getIdAlumno());
             ps.setInt(3, inscripcion.getMateria().getIdMateria());
-//            ps.setInt(4, inscripcion.getMateria().getIdMateria());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()){
@@ -117,7 +115,8 @@ public class InscripcionData {
 
     public List<Materia> obtenerMateriasNoCursadas(int id) {
         List<Materia> materias = new ArrayList();
-        String sql = "SELECT * FROM materia WHERE NOT EXISTS (SELECT inscripcion.idMateria, inscripcion.idAlumno = 6 FROM inscripcion WHERE materia.estado = 1) ";
+        String sql = "SELECT * FROM materia WHERE estado = 1 AND idMateria not in "
+                + "(SELECT idMateria FROM inscripcion WHERE idAlumno =?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);

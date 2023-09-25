@@ -274,7 +274,6 @@ public class FAlumnos extends javax.swing.JInternalFrame {
         JTApellido.setText(alumno.getApellido());
         JTNombre.setText(alumno.getNombre());
         JRBEstado.setSelected(alumno.isEstado());
-//        JDfecha.setDate(alumno.getFechaNacimiento().atStartOfDay(ZoneId.systemDefault()).toInstant().);
         LocalDate localDate = alumno.getFechaNacimiento();
         ZoneId zoneId = ZoneId.systemDefault();
         ZonedDateTime zonedDateTime = localDate.atStartOfDay(zoneId);
@@ -282,8 +281,7 @@ public class FAlumnos extends javax.swing.JInternalFrame {
         Instant instant = zonedDateTime.toInstant();
 
         Date date = Date.from(instant);
-            System.out.println(date);
-                
+        JDfecha.setDate(date);
         }else{
             JOptionPane.showMessageDialog(null, "tiene que ingresar un documento");
         }
