@@ -5,11 +5,13 @@
  */
 package universidadejemplo.Vistas;
 
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.AccesoADatos.AlumnoData;
 import universidadejemplo.AccesoADatos.InscripcionData;
 import universidadejemplo.AccesoADatos.MateriaData;
 import universidadejemplo.Entidades.Alumno;
+import universidadejemplo.Entidades.Materia;
 
 public class ManipulacionNotas extends javax.swing.JInternalFrame {
 
@@ -69,6 +71,11 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        JTTablaMaterias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTTablaMateriasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(JTTablaMaterias);
 
         JBGuardar.setText("Guardar");
@@ -147,6 +154,23 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
     private void JCBSelecAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBSelecAlumnoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JCBSelecAlumnoActionPerformed
+
+    private void JTTablaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTTablaMateriasMouseClicked
+        // TODO add your handling code here:
+        int seleccionarFila = JTTablaMaterias.rowAtPoint(evt.getPoint());
+        valorFila = (int) JTTablaMaterias.getValueAt(seleccionarFila, 2);
+        Alumno alumno = (Alumno) JCBSelecAlumno.getSelectedItem();
+        int id = alumno.getIdAlumno();
+        List<Materia> materias = inscripciondata.obtenerMateriaCursadas(id);
+    }//GEN-LAST:event_JTTablaMateriasMouseClicked
+   
+    private void cargarTabla (){
+       Materia materia = (Materia) JCBSelecAlumno.getSelectedItem();
+       for (Materia materia : inscripciondata.obtenerMateriaCursadas(materia.getIdMateria())) {
+            modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
+        }
+    }
+    
     private void armarCabecera() {
         modelotabla.addColumn("ID");
         modelotabla.addColumn("Nombre");

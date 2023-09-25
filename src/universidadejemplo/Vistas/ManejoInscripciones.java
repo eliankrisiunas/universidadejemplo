@@ -284,8 +284,6 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         Alumno alumno = (Alumno) JCBalumnos.getSelectedItem();
         int id = alumno.getIdAlumno();
         List<Inscripcion> inscripcionLista = inscripciondata.obtenerInscripcionPorAlumno(id);
-        System.out.println(inscripcionLista);
-        System.out.println(valorFila);
         if (valorFila != 0) {
             inscripciondata.borrarInscripcionMateriaAlumno(id, valorFila);
             JOptionPane.showMessageDialog(this, "Ya no está inscripto :-c");
@@ -298,7 +296,6 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int seleccionarFila = JTabla.rowAtPoint(evt.getPoint());
         valorFila = (int) JTabla.getValueAt(seleccionarFila, 0);
-
     }//GEN-LAST:event_JTablaMouseClicked
 
     private void cargarCombo() {
