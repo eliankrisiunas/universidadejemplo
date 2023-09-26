@@ -19,14 +19,16 @@ import universidadejemplo.Entidades.Alumno;
  * @author iarak
  */
 public class FAlumnos extends javax.swing.JInternalFrame {
+
     private AlumnoData alumnodata;
 
     /**
      * Creates new form FAlumnos
      */
-   public FAlumnos() {
+    public FAlumnos() {
         initComponents();
         alumnodata = new AlumnoData();
+        JBbuscar.setEnabled(false);
     }
 
     /**
@@ -63,7 +65,6 @@ public class FAlumnos extends javax.swing.JInternalFrame {
         setTitle("Formulario de Alumnos");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setNextFocusableComponent(jPanel1);
-        setOpaque(false);
         setVisible(false);
 
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -87,15 +88,9 @@ public class FAlumnos extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Fecha de Nacimiento: ");
 
-        JTDocumento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTDocumentoActionPerformed(evt);
-            }
-        });
-
-        JRBEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JRBEstadoActionPerformed(evt);
+        JTDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTDocumentoKeyReleased(evt);
             }
         });
 
@@ -226,7 +221,7 @@ public class FAlumnos extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,21 +236,6 @@ public class FAlumnos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JTDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTDocumentoActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_JTDocumentoActionPerformed
-
-    private void JRBEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JRBEstadoActionPerformed
-        // TODO add your handling code here:
-//        boolean estado = true;
-//        if (JRBEstado.isEnabled()) {
-//            estado = true;
-//        } else {
-//            estado = false;
-//        }
-    }//GEN-LAST:event_JRBEstadoActionPerformed
-
     private void JDfechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_JDfechaPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_JDfechaPropertyChange
@@ -267,25 +247,25 @@ public class FAlumnos extends javax.swing.JInternalFrame {
 
     private void JBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBbuscarActionPerformed
         // TODO add your handling code here:
-            // TODO add your handling code here:
+        // TODO add your handling code here:
         if (JTDocumento.getText() != null) {
-        int doc = Integer.parseInt(JTDocumento.getText());
-        Alumno alumno = alumnodata.buscarAlumnoPorDni(doc);
-        JTApellido.setText(alumno.getApellido());
-        JTNombre.setText(alumno.getNombre());
-        JRBEstado.setSelected(alumno.isEstado());
-        LocalDate localDate = alumno.getFechaNacimiento();
-        ZoneId zoneId = ZoneId.systemDefault();
-        ZonedDateTime zonedDateTime = localDate.atStartOfDay(zoneId);
+            int doc = Integer.parseInt(JTDocumento.getText());
+            Alumno alumno = alumnodata.buscarAlumnoPorDni(doc);
+            JTApellido.setText(alumno.getApellido());
+            JTNombre.setText(alumno.getNombre());
+            JRBEstado.setSelected(alumno.isEstado());
+            LocalDate localDate = alumno.getFechaNacimiento();
+            ZoneId zoneId = ZoneId.systemDefault();
+            ZonedDateTime zonedDateTime = localDate.atStartOfDay(zoneId);
 
-        Instant instant = zonedDateTime.toInstant();
+            Instant instant = zonedDateTime.toInstant();
 
-        Date date = Date.from(instant);
-        JDfecha.setDate(date);
-        }else{
+            Date date = Date.from(instant);
+            JDfecha.setDate(date);
+        } else {
             JOptionPane.showMessageDialog(null, "tiene que ingresar un documento");
         }
-       
+
     }//GEN-LAST:event_JBbuscarActionPerformed
 
     private void JBnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBnuevoActionPerformed
@@ -299,11 +279,6 @@ public class FAlumnos extends javax.swing.JInternalFrame {
 
     private void JBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBeliminarActionPerformed
         // TODO add your handling code here:
-               // TODO add your handling code here:
-//        LocalDate fecha = null;
-//        if (JDfecha.getDate() != null) {
-//            fecha = JDfecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//        }
         int doc = Integer.parseInt(JTDocumento.getText());
         Alumno alumno = alumnodata.buscarAlumnoPorDni(doc);
         alumnodata.eliminarAlumno(alumno.getIdAlumno());
@@ -314,6 +289,16 @@ public class FAlumnos extends javax.swing.JInternalFrame {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_JBsalirActionPerformed
+
+    private void JTDocumentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTDocumentoKeyReleased
+        // TODO add your handling code here:
+        if (JTDocumento.getText().isEmpty()) {
+            JBbuscar.setEnabled(false);
+        } else {
+            JBbuscar.setEnabled(true);
+        }
+    }//GEN-LAST:event_JTDocumentoKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBbuscar;

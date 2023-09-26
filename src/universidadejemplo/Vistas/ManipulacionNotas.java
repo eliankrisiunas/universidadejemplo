@@ -166,7 +166,7 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
    
     private void cargarTabla (){
        Materia materia = (Materia) JCBSelecAlumno.getSelectedItem();
-       for (Materia materia : inscripciondata.obtenerMateriaCursadas(materia.getIdMateria())) {
+       for (Materia materia2 : inscripciondata.obtenerMateriaCursadas(materia.getIdMateria())) {
             modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
         }
     }

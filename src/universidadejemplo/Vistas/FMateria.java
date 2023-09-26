@@ -12,6 +12,7 @@ public class FMateria extends javax.swing.JInternalFrame {
     public FMateria() {
         initComponents();
         materiadata = new MateriaData();
+        JBbuscar.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -25,7 +26,7 @@ public class FMateria extends javax.swing.JInternalFrame {
         jLAnno = new javax.swing.JLabel();
         jLEst = new javax.swing.JLabel();
         jTextFieldNom = new javax.swing.JTextField();
-        jTextFieldCod = new javax.swing.JTextField();
+        JTC = new javax.swing.JTextField();
         jTextFieldAnno = new javax.swing.JTextField();
         jRadioButtonEst = new javax.swing.JRadioButton();
         JBsalir = new javax.swing.JButton();
@@ -50,6 +51,12 @@ public class FMateria extends javax.swing.JInternalFrame {
         jLAnno.setText("Año");
 
         jLEst.setText("Estado");
+
+        JTC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTCKeyReleased(evt);
+            }
+        });
 
         JBsalir.setText("Salir");
         JBsalir.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +131,7 @@ public class FMateria extends javax.swing.JInternalFrame {
                             .addComponent(jRadioButtonEst)
                             .addComponent(jTextFieldAnno, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(JTC, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(43, 43, 43)
                                 .addComponent(JBbuscar))
                             .addComponent(jTextFieldNom, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -140,7 +147,7 @@ public class FMateria extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLCod)
-                    .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBbuscar))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -168,8 +175,8 @@ public class FMateria extends javax.swing.JInternalFrame {
 
     private void JBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBbuscarActionPerformed
 
-        if (jTextFieldCod.getText() != null) {
-            int id = Integer.parseInt(jTextFieldCod.getText());
+        if (JTC.getText() != null) {
+            int id = Integer.parseInt(JTC.getText());
             Materia materia = materiadata.buscarMateria(id);
             jTextFieldAnno.setText(valueOf(materia.getAnno()));
             jTextFieldNom.setText(materia.getNombre());
@@ -188,7 +195,7 @@ public class FMateria extends javax.swing.JInternalFrame {
         jTextFieldAnno.setText("");
         jTextFieldNom.setText("");
         jRadioButtonEst.setSelected(false);
-        jTextFieldCod.setText("");
+        JTC.setText("");
     }//GEN-LAST:event_JBnuevoActionPerformed
 
     private void JBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsalirActionPerformed
@@ -204,10 +211,19 @@ public class FMateria extends javax.swing.JInternalFrame {
 
     private void JBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBeliminarActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(jTextFieldCod.getText());
+        int id = Integer.parseInt(JTC.getText());
         Materia materia = materiadata.buscarMateria(id);
         materiadata.eliminarMateria(id);
     }//GEN-LAST:event_JBeliminarActionPerformed
+
+    private void JTCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTCKeyReleased
+        // TODO add your handling code here:
+        if (JTC.getText().isEmpty()) {
+            JBbuscar.setEnabled(false);
+        } else {
+            JBbuscar.setEnabled(true);
+        }
+    }//GEN-LAST:event_JTCKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -216,6 +232,7 @@ public class FMateria extends javax.swing.JInternalFrame {
     private javax.swing.JButton JBguardar;
     private javax.swing.JButton JBnuevo;
     private javax.swing.JButton JBsalir;
+    private javax.swing.JTextField JTC;
     private javax.swing.JLabel jLAnno;
     private javax.swing.JLabel jLCod;
     private javax.swing.JLabel jLEst;
@@ -224,7 +241,6 @@ public class FMateria extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRadioButtonEst;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextFieldAnno;
-    private javax.swing.JTextField jTextFieldCod;
     private javax.swing.JTextField jTextFieldNom;
     // End of variables declaration//GEN-END:variables
 

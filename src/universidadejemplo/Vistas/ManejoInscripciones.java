@@ -36,6 +36,8 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         cargarCombo();
         armarCabecera();
         Def();
+        JBanularInscr.setEnabled(false);
+        JBinscribir.setEnabled(false);
     }
 
     /**
@@ -208,7 +210,9 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JCBalumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBalumnosActionPerformed
-        // TODO add your handling code here:{
+        // TODO add your handling code here:
+        JBanularInscr.setEnabled(false);
+        JBinscribir.setEnabled(false);
         borrarFilas();
         if (JRmi.isSelected() == true) {
             Cmi();
@@ -224,13 +228,10 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         borrarFilas();
         if (JRmni.isSelected() == true) {
             Cmni();
-            JBinscribir.setEnabled(true);
-            JBanularInscr.setEnabled(false);
+            disables();
         } else {
             Def();
-            JBinscribir.setEnabled(true);
-            JBanularInscr.setEnabled(true);
-
+            disables();
         }
         JRmi.setSelected(false);
 
@@ -247,14 +248,10 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         borrarFilas();
         if (JRmi.isSelected() == true) {
             Cmi();
-            JBinscribir.setEnabled(false);
-            JBanularInscr.setEnabled(true);
-
+            disables();
         } else {
             Def();
-            JBinscribir.setEnabled(true);
-            JBanularInscr.setEnabled(true);
-
+            disables();
         }
         JRmni.setSelected(false);
 
@@ -294,6 +291,7 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
 
     private void JTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTablaMouseClicked
         // TODO add your handling code here:
+        Butvis();
         int seleccionarFila = JTabla.rowAtPoint(evt.getPoint());
         valorFila = (int) JTabla.getValueAt(seleccionarFila, 0);
     }//GEN-LAST:event_JTablaMouseClicked
@@ -350,5 +348,21 @@ public class ManejoInscripciones extends javax.swing.JInternalFrame {
         for (Materia materia : materiadata.listarMaterias()) {
             modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
         }
+    }
+
+    private void Butvis() {
+        if (JRmi.isSelected() == false && JRmni.isSelected() == false) {
+            JBanularInscr.setEnabled(true);
+            JBinscribir.setEnabled(true);
+        } else if (JRmi.isSelected() == true) {
+            JBanularInscr.setEnabled(true);
+        } else {
+            JBinscribir.setEnabled(true);
+        }
+    }
+
+    private void disables() {
+        JBanularInscr.setEnabled(false);
+        JBinscribir.setEnabled(false);
     }
 }
