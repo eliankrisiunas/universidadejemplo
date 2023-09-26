@@ -35,9 +35,11 @@ public class InscripcionData {
             ps.setInt(3, inscripcion.getMateria().getIdMateria());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()){
-                inscripcion.setIdInscripcion(rs.getInt("idInscripto"));
-                ps.close();
+            if (inscripcion.getMateria().getIdMateria() != inscripcion.getMateria().getIdMateria()) {
+                if (rs.next()) {
+                    inscripcion.setIdInscripcion(rs.getInt("idInscripto"));
+                    ps.close();
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "error de conexion " + ex.getMessage());
