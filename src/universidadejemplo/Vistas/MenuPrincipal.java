@@ -18,6 +18,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     FAlumnos fa = new FAlumnos();
     FMateria fm = new FMateria();
     ManejoInscripciones mi = new ManejoInscripciones();
+    ManipulacionNotas mn = new ManipulacionNotas();
     /**
      * Creates new form menu
      */
@@ -251,6 +252,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void JMnotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMnotasActionPerformed
         // TODO add your handling code here:
+        if (mn.isVisible() == false) {
+            JDescritorio.repaint();
+            JDescritorio.add(mn);
+            mn.setVisible(true);
+            mn.toFront();
+        }
     }//GEN-LAST:event_JMnotasActionPerformed
 
     private void MAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAlumnoActionPerformed

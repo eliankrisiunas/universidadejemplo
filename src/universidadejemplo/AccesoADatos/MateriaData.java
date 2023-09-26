@@ -60,7 +60,7 @@ public class MateriaData {
 
             } else {
 
-                JOptionPane.showMessageDialog(null, "No existe el alumno.");
+                JOptionPane.showMessageDialog(null, "No existe el alumno o faltan datos.");
 
             }
 

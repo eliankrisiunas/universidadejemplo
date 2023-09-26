@@ -11,6 +11,7 @@ import universidadejemplo.AccesoADatos.AlumnoData;
 import universidadejemplo.AccesoADatos.InscripcionData;
 import universidadejemplo.AccesoADatos.MateriaData;
 import universidadejemplo.Entidades.Alumno;
+import universidadejemplo.Entidades.Inscripcion;
 import universidadejemplo.Entidades.Materia;
 
 public class ManipulacionNotas extends javax.swing.JInternalFrame {
@@ -20,8 +21,10 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
     private MateriaData materiadata;
     private InscripcionData inscripciondata;
     private Alumno alumno;
-    private int valorFila;
-
+    private double valorFila;
+    private int valorFila2;
+    private int seleccionarFila;
+    
     public ManipulacionNotas() {
         initComponents();
         alumnodata = new AlumnoData();
@@ -29,6 +32,7 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
         inscripciondata = new InscripcionData();
         cargarCombo();
         armarCabecera();
+        cargarTabla();
     }
 
     /**
@@ -79,6 +83,11 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(JTTablaMaterias);
 
         JBGuardar.setText("Guardar");
+        JBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBGuardarActionPerformed(evt);
+            }
+        });
 
         JBSalir.setText("Salir");
         JBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -149,32 +158,46 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         setVisible(false);
         dispose();
+        cargarTabla();
     }//GEN-LAST:event_JBSalirActionPerformed
 
     private void JCBSelecAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBSelecAlumnoActionPerformed
         // TODO add your handling code here:
+        cargarTabla();
     }//GEN-LAST:event_JCBSelecAlumnoActionPerformed
 
     private void JTTablaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTTablaMateriasMouseClicked
         // TODO add your handling code here:
-        int seleccionarFila = JTTablaMaterias.rowAtPoint(evt.getPoint());
-        valorFila = (int) JTTablaMaterias.getValueAt(seleccionarFila, 2);
+        seleccionarFila = JTTablaMaterias.rowAtPoint(evt.getPoint());
+        valorFila = (int) (double) JTTablaMaterias.getValueAt(seleccionarFila, 2);
+        cargarTabla();
+    }//GEN-LAST:event_JTTablaMateriasMouseClicked
+
+    private void JBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBGuardarActionPerformed
+        // TODO add your handling code here:
         Alumno alumno = (Alumno) JCBSelecAlumno.getSelectedItem();
         int id = alumno.getIdAlumno();
         List<Materia> materias = inscripciondata.obtenerMateriaCursadas(id);
-    }//GEN-LAST:event_JTTablaMateriasMouseClicked
-   
-    private void cargarTabla (){
-       Materia materia = (Materia) JCBSelecAlumno.getSelectedItem();
-       for (Materia materia2 : inscripciondata.obtenerMateriaCursadas(materia.getIdMateria())) {
-            modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnno()});
+        System.out.println(valorFila + "\n" + alumno.getIdAlumno()  + "\n" +  valorFila2);
+        valorFila2 = (int) JTTablaMaterias.getValueAt(seleccionarFila, 0);
+        inscripciondata.actualizarNota(valorFila, id, valorFila2); //nota, IDal, IDmat
+    }//GEN-LAST:event_JBGuardarActionPerformed
+
+    private void cargarTabla() {
+        borrarFilas();
+        Alumno alumno = (Alumno) JCBSelecAlumno.getSelectedItem();
+        List<Inscripcion> ins = inscripciondata.obtenerInscripcionPorAlumno(alumno.getIdAlumno());
+        for (Materia materia : inscripciondata.obtenerMateriaCursadas(alumno.getIdAlumno())) {
+            for (Inscripcion insc : ins) {
+                modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), insc.getNota()});
+            }
         }
     }
-    
+
     private void armarCabecera() {
-        modelotabla.addColumn("ID");
-        modelotabla.addColumn("Nombre");
-        modelotabla.addColumn("Nota");
+        modelotabla.addColumn("ID"); //Materia
+        modelotabla.addColumn("Nombre"); //Materia
+        modelotabla.addColumn("Nota"); //Inscripción
         JTTablaMaterias.setModel(modelotabla);
     }
 
@@ -184,10 +207,11 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
         }
 
     }
+
     private void borrarFilas() {
-        ((DefaultTableModel) JCBSelecAlumno.getModel()).setRowCount(0);
+        ((DefaultTableModel) JTTablaMaterias.getModel()).setRowCount(0);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBGuardar;
     private javax.swing.JButton JBSalir;

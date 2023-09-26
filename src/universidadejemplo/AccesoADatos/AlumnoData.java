@@ -69,7 +69,7 @@ public class AlumnoData {
                 
             }else{
             
-                JOptionPane.showConfirmDialog(null, "No existe el alumno");
+                JOptionPane.showConfirmDialog(null, "No existe el alumno o faltan datos.");
             }
             
             ps.close();
@@ -101,7 +101,7 @@ public class AlumnoData {
                 alumno.setEstado(true);
                 
             } else {
-            JOptionPane.showConfirmDialog(null, "No existe el alumno");
+            JOptionPane.showConfirmDialog(null, "No existe el alumno o faltan datos.");
             }
             ps.close();
         } catch (SQLException ex) {
