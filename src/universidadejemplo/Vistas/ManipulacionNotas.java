@@ -21,8 +21,8 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
     private MateriaData materiadata;
     private InscripcionData inscripciondata;
     private Alumno alumno;
-    private double valorFila;
-    private int valorFila2;
+    private String valorNota;
+    private int valorIDMat;
     private int seleccionarFila;
     
     public ManipulacionNotas() {
@@ -169,7 +169,9 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
     private void JTTablaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTTablaMateriasMouseClicked
         // TODO add your handling code here:
         seleccionarFila = JTTablaMaterias.rowAtPoint(evt.getPoint());
-        valorFila = (int) (double) JTTablaMaterias.getValueAt(seleccionarFila, 2);
+        valorNota = (String) JTTablaMaterias.getValueAt(seleccionarFila, 2);
+        valorIDMat = (int) JTTablaMaterias.getValueAt(seleccionarFila, 0);
+        System.out.println("Mouse clicked:" + valorNota + ", " + valorIDMat + ".");
         cargarTabla();
     }//GEN-LAST:event_JTTablaMateriasMouseClicked
 
@@ -178,9 +180,10 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
         Alumno alumno = (Alumno) JCBSelecAlumno.getSelectedItem();
         int id = alumno.getIdAlumno();
         List<Materia> materias = inscripciondata.obtenerMateriaCursadas(id);
-        System.out.println(valorFila + "\n" + alumno.getIdAlumno()  + "\n" +  valorFila2);
-        valorFila2 = (int) JTTablaMaterias.getValueAt(seleccionarFila, 0);
-        inscripciondata.actualizarNota(valorFila, id, valorFila2); //nota, IDal, IDmat
+        System.out.println(valorNota + "\n" + alumno.getIdAlumno()  + "\n" +  valorIDMat);
+        inscripciondata.actualizarNota(Double.parseDouble(valorNota), id, valorIDMat); //nota, IDal, IDmat
+        System.out.println("---------------");
+        System.out.println(valorNota + "\n" + alumno.getIdAlumno()  + "\n" +  valorIDMat);
     }//GEN-LAST:event_JBGuardarActionPerformed
 
     private void cargarTabla() {
