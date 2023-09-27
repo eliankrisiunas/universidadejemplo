@@ -28,7 +28,7 @@ public class MateriaData {
             ps.setInt(2, materia.getAnno());
             ps.setBoolean(3, materia.isEstado());
             ps.executeUpdate();
-//             ResultSet rs= ps.getGeneratedKeys();
+             ResultSet rs= ps.getGeneratedKeys();
 //             if (rs.next()){
 //                 materia.setIdMateria(rs.getInt("idMateria"));
 //                 ps.close();
@@ -58,21 +58,19 @@ public class MateriaData {
                 materia.setAnno(rs.getInt("anno"));
                 materia.setEstado(true);
 
-            } else {
-
-                JOptionPane.showMessageDialog(null, "No existe el alumno o faltan datos.");
-
             }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materias. " + ex.getMessage());
+        }catch(NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "Debes ingresar un id");
         }
 
         return materia;
     }
 
     public void modificarMateria(Materia materia) {
-        String sql = "UPDATE alumno SET nombre = ?, anno = ?, estado = ? WHERE idMateria = ?";
+        String sql = "UPDATE materia SET nombre = ?, anno = ?, estado = ? WHERE idMateria = ?";
 
         PreparedStatement ps = null;
 
@@ -81,7 +79,7 @@ public class MateriaData {
             ps.setString(1, materia.getNombre());
             ps.setInt(2, materia.getAnno());
             ps.setBoolean(3, materia.isEstado());
-
+            ps.setInt(4, materia.getIdMateria());
         } catch (SQLException ex) {
             Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -100,7 +98,7 @@ public class MateriaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(MateriaData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Ingrese un codigo valido");
         }
     }
 

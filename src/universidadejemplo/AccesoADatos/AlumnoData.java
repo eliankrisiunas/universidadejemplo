@@ -67,16 +67,17 @@ public class AlumnoData {
                 alumno.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(true);
                 
-            }else{
-            
-                JOptionPane.showMessageDialog(null, "No existe el alumno o faltan datos.");
             }
             
             ps.close();
         
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno "+ex.getMessage());
+        }catch(NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "Debes ingresar un id");
         }
+    
+    
     return alumno;
     }
     

@@ -13,6 +13,8 @@ public class FMateria extends javax.swing.JInternalFrame {
         initComponents();
         materiadata = new MateriaData();
         JBbuscar.setEnabled(false);
+        JBeliminar.setEnabled(false);
+        JBguardar.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -52,9 +54,21 @@ public class FMateria extends javax.swing.JInternalFrame {
 
         jLEst.setText("Estado");
 
+        jTextFieldNom.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldNomKeyReleased(evt);
+            }
+        });
+
         JTC.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 JTCKeyReleased(evt);
+            }
+        });
+
+        jTextFieldAnno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldAnnoKeyReleased(evt);
             }
         });
 
@@ -182,9 +196,12 @@ public class FMateria extends javax.swing.JInternalFrame {
             jTextFieldAnno.setText(valueOf(materia.getAnno()));
             jTextFieldNom.setText(materia.getNombre());
             jRadioButtonEst.setSelected(materia.isEstado());
+            BotonesActivos();
             }catch(NumberFormatException ex){
                 JOptionPane.showMessageDialog(null, "debe ingresar un codigo");
-            }
+            }catch(NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "Debes ingresar un codigo correcto");
+        }
             } else {
             JOptionPane.showMessageDialog(null, "necesitas ingresar un codigo");
         }
@@ -200,6 +217,7 @@ public class FMateria extends javax.swing.JInternalFrame {
         jTextFieldNom.setText("");
         jRadioButtonEst.setSelected(false);
         JTC.setText("");
+        BotonesActivos();
     }//GEN-LAST:event_JBnuevoActionPerformed
 
     private void JBsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBsalirActionPerformed
@@ -215,20 +233,28 @@ public class FMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_JBguardarActionPerformed
 
     private void JBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBeliminarActionPerformed
-        // TODO add your handling code here:
+        
         int id = Integer.parseInt(JTC.getText());
         Materia materia = materiadata.buscarMateria(id);
         materiadata.eliminarMateria(id);
     }//GEN-LAST:event_JBeliminarActionPerformed
 
     private void JTCKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTCKeyReleased
-        // TODO add your handling code here:
+     //si el boton buscar esta 
         if (JTC.getText().isEmpty()) {
             JBbuscar.setEnabled(false);
         } else {
             JBbuscar.setEnabled(true);
         }
     }//GEN-LAST:event_JTCKeyReleased
+
+    private void jTextFieldNomKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNomKeyReleased
+      BotonesActivos();
+    }//GEN-LAST:event_jTextFieldNomKeyReleased
+
+    private void jTextFieldAnnoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldAnnoKeyReleased
+       BotonesActivos();
+    }//GEN-LAST:event_jTextFieldAnnoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -260,8 +286,17 @@ private void CargarMateria(){
     }
 }
 
+private void BotonesActivos(){
+      if (jTextFieldNom.getText().isEmpty() || jTextFieldAnno.getText().isEmpty()) {
+            JBeliminar.setEnabled(false);
+            JBguardar.setEnabled(false);
+        } else {
+            JBeliminar.setEnabled(true);
+            JBguardar.setEnabled(true);
+        }
 
 
 
 
+}
 }

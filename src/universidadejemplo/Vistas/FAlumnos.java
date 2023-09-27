@@ -29,6 +29,8 @@ public class FAlumnos extends javax.swing.JInternalFrame {
         initComponents();
         alumnodata = new AlumnoData();
         JBbuscar.setEnabled(false);
+        JBeliminar.setEnabled(false);
+        JBguardar.setEnabled(false);
     }
 
     /**
@@ -97,6 +99,18 @@ public class FAlumnos extends javax.swing.JInternalFrame {
         JTDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 JTDocumentoKeyReleased(evt);
+            }
+        });
+
+        JTApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTApellidoKeyReleased(evt);
+            }
+        });
+
+        JTNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTNombreKeyReleased(evt);
             }
         });
 
@@ -250,13 +264,12 @@ public class FAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_JDfechaPropertyChange
 
     private void JBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBguardarActionPerformed
-        // TODO add your handling code here:
+        
         CargarAlumno();
     }//GEN-LAST:event_JBguardarActionPerformed
 
     private void JBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBbuscarActionPerformed
-        // TODO add your handling code here:
-        // TODO add your handling code here:
+            
         if (JTDocumento.getText() != null) {
             try{
             int doc = Integer.parseInt(JTDocumento.getText());
@@ -272,26 +285,27 @@ public class FAlumnos extends javax.swing.JInternalFrame {
 
             Date date = Date.from(instant);
             JDfecha.setDate(date);
+               BotonesActivos();
             }catch(NumberFormatException ex){
                 JOptionPane.showMessageDialog(null, "debe ingresar un numero de documento");
+                }catch(NullPointerException ex){
+                JOptionPane.showMessageDialog(null, "Ingrese un documento valido");
                 }
-        } else {
+                }else {
             JOptionPane.showMessageDialog(null, "tiene que ingresar un documento");
         }
-
     }//GEN-LAST:event_JBbuscarActionPerformed
 
     private void JBnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBnuevoActionPerformed
-        // TODO add your handling code here:
         JTNombre.setText("");
         JTApellido.setText("");
         JTDocumento.setText("");
         JRBEstado.setSelected(false);
         JDfecha.setCalendar(null);
+        BotonesActivos();
     }//GEN-LAST:event_JBnuevoActionPerformed
 
     private void JBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBeliminarActionPerformed
-        // TODO add your handling code here:
         int doc = Integer.parseInt(JTDocumento.getText());
         Alumno alumno = alumnodata.buscarAlumnoPorDni(doc);
         alumnodata.eliminarAlumno(alumno.getIdAlumno());
@@ -315,6 +329,14 @@ public class FAlumnos extends javax.swing.JInternalFrame {
     private void JTDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTDocumentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTDocumentoActionPerformed
+
+    private void JTApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTApellidoKeyReleased
+        BotonesActivos();
+    }//GEN-LAST:event_JTApellidoKeyReleased
+
+    private void JTNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTNombreKeyReleased
+      BotonesActivos();
+    }//GEN-LAST:event_JTNombreKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -350,4 +372,15 @@ public class FAlumnos extends javax.swing.JInternalFrame {
         alum.guadarAlumno(alumno);
     }
 
+    private void BotonesActivos(){
+      if (JTApellido.getText().isEmpty() || JTNombre.getText().isEmpty()) {
+            JBeliminar.setEnabled(false);
+            JBguardar.setEnabled(false);
+        } else {
+            JBeliminar.setEnabled(true);
+            JBguardar.setEnabled(true);
+        }
+      
+      
+    }
 }

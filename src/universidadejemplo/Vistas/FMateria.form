@@ -143,6 +143,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNom">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldNomKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="JTC">
       <Events>
@@ -150,6 +153,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldAnno">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldAnnoKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButtonEst">
     </Component>

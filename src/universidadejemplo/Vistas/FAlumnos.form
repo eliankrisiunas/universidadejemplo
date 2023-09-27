@@ -238,8 +238,14 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="JTApellido">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JTApellidoKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="JTNombre">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JTNombreKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="JRBEstado">
         </Component>

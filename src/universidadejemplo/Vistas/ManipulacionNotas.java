@@ -5,7 +5,9 @@
  */
 package universidadejemplo.Vistas;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.AccesoADatos.AlumnoData;
 import universidadejemplo.AccesoADatos.InscripcionData;
@@ -24,7 +26,7 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
     private String valorNota;
     private int valorIDMat;
     private int seleccionarFila;
-    
+
     public ManipulacionNotas() {
         initComponents();
         alumnodata = new AlumnoData();
@@ -171,7 +173,6 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
         seleccionarFila = JTTablaMaterias.rowAtPoint(evt.getPoint());
         valorNota = (String) JTTablaMaterias.getValueAt(seleccionarFila, 2);
         valorIDMat = (int) JTTablaMaterias.getValueAt(seleccionarFila, 0);
-        System.out.println("Mouse clicked:" + valorNota + ", " + valorIDMat + ".");
         cargarTabla();
     }//GEN-LAST:event_JTTablaMateriasMouseClicked
 
@@ -180,19 +181,23 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
         Alumno alumno = (Alumno) JCBSelecAlumno.getSelectedItem();
         int id = alumno.getIdAlumno();
         List<Materia> materias = inscripciondata.obtenerMateriaCursadas(id);
-        System.out.println(valorNota + "\n" + alumno.getIdAlumno()  + "\n" +  valorIDMat);
         inscripciondata.actualizarNota(Double.parseDouble(valorNota), id, valorIDMat); //nota, IDal, IDmat
-        System.out.println("---------------");
-        System.out.println(valorNota + "\n" + alumno.getIdAlumno()  + "\n" +  valorIDMat);
+
     }//GEN-LAST:event_JBGuardarActionPerformed
 
     private void cargarTabla() {
         borrarFilas();
-        Alumno alumno = (Alumno) JCBSelecAlumno.getSelectedItem();
-        List<Inscripcion> ins = inscripciondata.obtenerInscripcionPorAlumno(alumno.getIdAlumno());
-        for (Materia materia : inscripciondata.obtenerMateriaCursadas(alumno.getIdAlumno())) {
-            for (Inscripcion insc : ins) {
+        Alumno alumno = (Alumno) JCBSelecAlumno.getSelectedItem();   // Obtiene el Alumno seleccionado en el JComboBox.
+        List<Inscripcion> inscripciones = inscripciondata.obtenerInscripcionPorAlumno(alumno.getIdAlumno());    // Obtiene una lista de inscripciones del alumno.
+        Set<Integer> materiasAgregadas = new HashSet<>(); // Crea un conjunto (Set) para evitar duplicados de materias.
+        
+        for (Inscripcion insc : inscripciones) { // Bucle para recorrer las inscripciones del alumno.
+            Materia materia = insc.getMateria();  // Obtiene la materia asociada a la inscripción.
+            if (materia != null && !materiasAgregadas.contains(materia.getIdMateria())) { // Verifica que la materia no sea nula y no se haya agregado previamente.
+                // Agrega una fila a la tabla con la información de la materia y la nota.
                 modelotabla.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), insc.getNota()});
+                // Agrega el ID de la materia al conjunto de materias agregadas para evitar duplicados.
+                materiasAgregadas.add(materia.getIdMateria());
             }
         }
     }
@@ -214,6 +219,7 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
     private void borrarFilas() {
         ((DefaultTableModel) JTTablaMaterias.getModel()).setRowCount(0);
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBGuardar;
