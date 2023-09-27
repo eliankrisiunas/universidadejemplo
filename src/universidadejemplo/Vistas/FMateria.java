@@ -176,12 +176,16 @@ public class FMateria extends javax.swing.JInternalFrame {
     private void JBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBbuscarActionPerformed
 
         if (JTC.getText() != null) {
+            try{
             int id = Integer.parseInt(JTC.getText());
             Materia materia = materiadata.buscarMateria(id);
             jTextFieldAnno.setText(valueOf(materia.getAnno()));
             jTextFieldNom.setText(materia.getNombre());
             jRadioButtonEst.setSelected(materia.isEstado());
-        } else {
+            }catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(null, "debe ingresar un codigo");
+            }
+            } else {
             JOptionPane.showMessageDialog(null, "necesitas ingresar un codigo");
         }
     }//GEN-LAST:event_JBbuscarActionPerformed
@@ -207,6 +211,7 @@ public class FMateria extends javax.swing.JInternalFrame {
     private void JBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBguardarActionPerformed
         // TODO add your handling code here:
         CargarMateria();
+        
     }//GEN-LAST:event_JBguardarActionPerformed
 
     private void JBeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBeliminarActionPerformed
@@ -245,9 +250,14 @@ public class FMateria extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
 private void CargarMateria(){
+    try{
     Materia materia = new Materia ( jTextFieldNom.getText(), Integer.parseInt(jTextFieldAnno.getText()), jRadioButtonEst.isEnabled());
     materiadata.guardarMateria(materia);
     materiadata.modificarMateria(materia);
+    JOptionPane.showMessageDialog(null, "se ha guardado la materia");
+    }catch(NumberFormatException ex){
+        JOptionPane.showMessageDialog(null, "debe ingresar el año de la materia a cursar");
+    }
 }
 
 

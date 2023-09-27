@@ -69,7 +69,7 @@ public class AlumnoData {
                 
             }else{
             
-                JOptionPane.showConfirmDialog(null, "No existe el alumno o faltan datos.");
+                JOptionPane.showMessageDialog(null, "No existe el alumno o faltan datos.");
             }
             
             ps.close();
@@ -101,11 +101,11 @@ public class AlumnoData {
                 alumno.setEstado(true);
                 
             } else {
-            JOptionPane.showConfirmDialog(null, "No existe el alumno o faltan datos.");
+            JOptionPane.showMessageDialog(null, "No existe el alumno o faltan datos.");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(null, "Error al acceder a la tabla Alumno" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno" + ex.getMessage());
         }
     
     

@@ -89,6 +89,11 @@ public class FAlumnos extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Fecha de Nacimiento: ");
 
+        JTDocumento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JTDocumentoActionPerformed(evt);
+            }
+        });
         JTDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 JTDocumentoKeyReleased(evt);
@@ -253,6 +258,7 @@ public class FAlumnos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         // TODO add your handling code here:
         if (JTDocumento.getText() != null) {
+            try{
             int doc = Integer.parseInt(JTDocumento.getText());
             Alumno alumno = alumnodata.buscarAlumnoPorDni(doc);
             JTApellido.setText(alumno.getApellido());
@@ -266,6 +272,9 @@ public class FAlumnos extends javax.swing.JInternalFrame {
 
             Date date = Date.from(instant);
             JDfecha.setDate(date);
+            }catch(NumberFormatException ex){
+                JOptionPane.showMessageDialog(null, "debe ingresar un numero de documento");
+                }
         } else {
             JOptionPane.showMessageDialog(null, "tiene que ingresar un documento");
         }
@@ -302,6 +311,10 @@ public class FAlumnos extends javax.swing.JInternalFrame {
             JBbuscar.setEnabled(true);
         }
     }//GEN-LAST:event_JTDocumentoKeyReleased
+
+    private void JTDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTDocumentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JTDocumentoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
