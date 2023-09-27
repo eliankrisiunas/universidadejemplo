@@ -5,19 +5,39 @@
  */
 package universidadejemplo.Vistas;
 
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import universidadejemplo.AccesoADatos.AlumnoData;
+import universidadejemplo.AccesoADatos.InscripcionData;
+import universidadejemplo.AccesoADatos.MateriaData;
+import universidadejemplo.Entidades.Alumno;
+import universidadejemplo.Entidades.Inscripcion;
+import universidadejemplo.Entidades.Materia;
 
 /**
  *
  * @author iarak
  */
 public class AlumnosPorMateria extends javax.swing.JInternalFrame {
-private DefaultTableModel modelotabla = new DefaultTableModel();
+
+    private DefaultTableModel modelotabla = new DefaultTableModel();
+    private AlumnoData alumnodata;
+    private MateriaData materiadata;
+    private InscripcionData inscripciondata;
+    private Alumno alumno;
+    private Materia materia;
+
     /**
      * Creates new form AlumnosPorMateria
      */
     public AlumnosPorMateria() {
+        alumnodata = new AlumnoData();
+        materiadata = new MateriaData();
+        inscripciondata = new InscripcionData();
         initComponents();
+        cargarCombo();
+        cargarTabla();
+        armarCabecera();
     }
 
     /**
@@ -42,6 +62,12 @@ private DefaultTableModel modelotabla = new DefaultTableModel();
         jLabel1.setText("Listar Alumnos por Materia");
 
         jLabel2.setText("Seleccione una materia:");
+
+        JCBSelecMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCBSelecMateriaActionPerformed(evt);
+            }
+        });
 
         JTTablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -115,7 +141,12 @@ private DefaultTableModel modelotabla = new DefaultTableModel();
         setVisible(false);
         dispose();
     }//GEN-LAST:event_JBSalirActionPerformed
-private void armarCabecera() {
+
+    private void JCBSelecMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCBSelecMateriaActionPerformed
+        // TODO add your handling code here:
+        cargarTabla();
+    }//GEN-LAST:event_JCBSelecMateriaActionPerformed
+    private void armarCabecera() {
         modelotabla.addColumn("ID");
         modelotabla.addColumn("DNI");
         modelotabla.addColumn("Apellido");
@@ -123,10 +154,27 @@ private void armarCabecera() {
         JTTablaAlumnos.setModel(modelotabla);
     }
 
+    private void cargarTabla() {
+        borrarFilas();
+        Materia materia = (Materia) JCBSelecMateria.getSelectedItem();
+        List<Alumno> list = inscripciondata.obtenerAlumnosXMateria(materia.getIdMateria());
+        for (Alumno alumno : list) {
+            modelotabla.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
+        }
+    }
 
+    private void cargarCombo() {
+        for (Materia materia : materiadata.listarMaterias()) {
+            JCBSelecMateria.addItem(materia);
+        }
+    }
+
+    private void borrarFilas() {
+        ((DefaultTableModel) JTTablaAlumnos.getModel()).setRowCount(0);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBSalir;
-    private javax.swing.JComboBox<String> JCBSelecMateria;
+    private javax.swing.JComboBox<Materia> JCBSelecMateria;
     private javax.swing.JTable JTTablaAlumnos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

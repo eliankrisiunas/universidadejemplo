@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 public class MenuPrincipal extends javax.swing.JFrame {
     FAlumnos fa = new FAlumnos();
     FMateria fm = new FMateria();
+    AlumnosPorMateria mp = new AlumnosPorMateria();
     ManejoInscripciones mi = new ManejoInscripciones();
     ManipulacionNotas mn = new ManipulacionNotas();
     /**
@@ -59,7 +60,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         JMinscripciones = new javax.swing.JMenuItem();
         JMnotas = new javax.swing.JMenuItem();
         MConsulta = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        AlumnosPorMateria = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -213,8 +214,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         MConsulta.setText("Consulta");
 
-        jMenuItem9.setText("Alumnos por Materia");
-        MConsulta.add(jMenuItem9);
+        AlumnosPorMateria.setText("Alumnos por Materia");
+        AlumnosPorMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlumnosPorMateriaActionPerformed(evt);
+            }
+        });
+        MConsulta.add(AlumnosPorMateria);
 
         jMenuBar1.add(MConsulta);
 
@@ -287,6 +293,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
             fm.setBounds(110, 10, 474, 372);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
     }
+    private void AlumnosPorMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlumnosPorMateriaActionPerformed
+        // TODO add your handling code here:
+          if (mp.isVisible() == false) {
+            JDescritorio.repaint();
+            JDescritorio.add(mp);
+            mp.setVisible(true);
+            mp.toFront();
+            mp.setBounds(110, 10, 474, 372);
+    }                                          
+    }//GEN-LAST:event_AlumnosPorMateriaActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -324,6 +341,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem AlumnosPorMateria;
     private javax.swing.JDesktopPane JDescritorio;
     private javax.swing.JMenuItem JMformularioAlumno;
     private javax.swing.JMenuItem JMinscripciones;
@@ -346,7 +364,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel text1;
     // End of variables declaration//GEN-END:variables

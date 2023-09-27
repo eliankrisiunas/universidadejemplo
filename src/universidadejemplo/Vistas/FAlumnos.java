@@ -40,6 +40,7 @@ public class FAlumnos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -55,9 +56,9 @@ public class FAlumnos extends javax.swing.JInternalFrame {
         JBeliminar = new javax.swing.JButton();
         JBguardar = new javax.swing.JButton();
         JBsalir = new javax.swing.JButton();
-        JDfecha = new com.toedter.calendar.JDateChooser();
         JBbuscar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        JDfecha = new com.toedter.calendar.JDateChooser();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -168,8 +169,11 @@ public class FAlumnos extends javax.swing.JInternalFrame {
                                             .addComponent(JTDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(36, 36, 36)
                                             .addComponent(JBbuscar)))
-                                    .addComponent(JRBEstado)
-                                    .addComponent(JDfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(JRBEstado)
+                                            .addComponent(JDfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(107, 107, 107)))))
                         .addGap(0, 29, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -201,7 +205,7 @@ public class FAlumnos extends javax.swing.JInternalFrame {
                             .addComponent(JTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(43, 43, 43)
                         .addComponent(jLabel5)))
-                .addGap(28, 28, 28)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(JDfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -311,6 +315,7 @@ public class FAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField JTApellido;
     private javax.swing.JTextField JTDocumento;
     private javax.swing.JTextField JTNombre;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
