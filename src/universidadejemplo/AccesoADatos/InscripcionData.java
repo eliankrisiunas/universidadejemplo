@@ -187,7 +187,7 @@ public class InscripcionData {
 
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "La nota ha sido actualizada.");
-            } else {
+            }else{
                 JOptionPane.showMessageDialog(null, "La nota no se ha podido actualizar");
             }
 

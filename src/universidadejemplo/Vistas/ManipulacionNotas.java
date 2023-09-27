@@ -171,17 +171,19 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
     private void JTTablaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTTablaMateriasMouseClicked
         // TODO add your handling code here:
         seleccionarFila = JTTablaMaterias.rowAtPoint(evt.getPoint());
-        valorNota = (String) JTTablaMaterias.getValueAt(seleccionarFila, 2);
-        valorIDMat = (int) JTTablaMaterias.getValueAt(seleccionarFila, 0);
-        cargarTabla();
+        valorIDMat = Integer.parseInt(JTTablaMaterias.getValueAt(seleccionarFila, 0).toString());
+
     }//GEN-LAST:event_JTTablaMateriasMouseClicked
 
     private void JBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBGuardarActionPerformed
         // TODO add your handling code here:
         Alumno alumno = (Alumno) JCBSelecAlumno.getSelectedItem();
         int id = alumno.getIdAlumno();
-        List<Materia> materias = inscripciondata.obtenerMateriaCursadas(id);
-        inscripciondata.actualizarNota(Double.parseDouble(valorNota), id, valorIDMat); //nota, IDal, IDmat
+        valorNota = (String) JTTablaMaterias.getValueAt(seleccionarFila, 2);//obtiene la nota actualizada al darle al boton guardar
+        JTTablaMaterias.setValueAt(Double.parseDouble(valorNota), seleccionarFila, 2);// Actualiza la nota en la tabla
+        inscripciondata.actualizarNota(Double.parseDouble(valorNota), id, valorIDMat);// Actualiza la nota en la base de datos
+        cargarTabla();// Vuelve a cargar la tabla
+
 
     }//GEN-LAST:event_JBGuardarActionPerformed
 
@@ -190,7 +192,7 @@ public class ManipulacionNotas extends javax.swing.JInternalFrame {
         Alumno alumno = (Alumno) JCBSelecAlumno.getSelectedItem();   // Obtiene el Alumno seleccionado en el JComboBox.
         List<Inscripcion> inscripciones = inscripciondata.obtenerInscripcionPorAlumno(alumno.getIdAlumno());    // Obtiene una lista de inscripciones del alumno.
         Set<Integer> materiasAgregadas = new HashSet<>(); // Crea un conjunto (Set) para evitar duplicados de materias.
-        
+
         for (Inscripcion insc : inscripciones) { // Bucle para recorrer las inscripciones del alumno.
             Materia materia = insc.getMateria();  // Obtiene la materia asociada a la inscripción.
             if (materia != null && !materiasAgregadas.contains(materia.getIdMateria())) { // Verifica que la materia no sea nula y no se haya agregado previamente.
